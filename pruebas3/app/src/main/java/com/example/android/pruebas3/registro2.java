@@ -67,8 +67,6 @@ public class registro2 extends AppCompatActivity {
         final String apellido2 = editApellido.getText().toString();
         final String nombre3 = nombre1 + " " + apellido2;
 
-        dou = "Seleccione un colegio";
-
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

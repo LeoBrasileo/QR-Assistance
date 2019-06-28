@@ -145,6 +145,7 @@ public class login extends AppCompatActivity {
                             Bundle bundle = new Bundle();
                             bundle.putString("user", login1.getNombre().toString());
                             bundle.putString("mail", login1.getEmail().toString());
+                            bundle.putString("dni", login1.getDni().toString());
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }else
@@ -166,40 +167,4 @@ public class login extends AppCompatActivity {
             }
         });
     }
-
-    private void Loguearse()
-    {
-        String email = editDni.getText().toString().trim();
-        String pass = contrasena.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email))
-        {
-            Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (TextUtils.isEmpty(pass))
-        {
-            Toast.makeText(this,"Se debe ingresar una contraseña",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        progressDialog.setMessage("Ingresando...");
-        progressDialog.show();
-
-        firebaseAuth.signInWithEmailAndPassword(email,pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
-                            Toast.makeText(login.this,"Bienvenido: "+ editDni.getText(),Toast.LENGTH_LONG).show();
-                        }else
-                        {
-                            Toast.makeText(login.this, "Error al loguearse", Toast.LENGTH_LONG).show();
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
-    }
-
 }

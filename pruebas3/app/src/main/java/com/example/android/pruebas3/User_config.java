@@ -2,17 +2,30 @@ package com.example.android.pruebas3;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +54,8 @@ public class User_config extends Fragment
     public AdapterConfigs adapterConfigs;
 
     private OnFragmentInteractionListener mListener;
+    private FirebaseDatabase database;
+    private DatabaseReference users;
 
     public User_config() {
         // Required empty public constructor
@@ -75,21 +90,75 @@ public class User_config extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        listView = (ListView) User_config.findViewById(R.id.mainMenu);
 
-        //Trabajar por aca. error por aca
+                             Bundle savedInstanceState)
+    {
+        View v = inflater.inflate(R.layout.fragment_user_config, container, false);
+        listView = (ListView) v.findViewById(R.id.mainMenu);
 
-        String[] menuItems = {"Cambiar nombre",
-                              "Registrar/cambiar email",
-                              "Cambiar contraseña"};
+        database = FirebaseDatabase.getInstance();
+        users = database.getReference("usuarios");
+        Bundle bundle = getActivity().getIntent().getExtras();
+        final String dni = bundle.getString("dni");
 
-        int[] menuIcons = {
-                R.drawable.listviewtest
-        };
+        final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
+        configs_strings.add((new Configs_strings(R.drawable.mailfoto,"Registrar / cambiar Email")));
+        configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
+        configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña"));
+        configs_strings.add(new Configs_strings(R.drawable.school,"Colegio"));
+        configs_strings.add(new Configs_strings(R.drawable.notificacion,"Notificaciones"));
+        configs_strings.add(new Configs_strings(R.drawable.tachoide, "Eliminar usuario"));
 
-        ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
-        configs_strings.add(new Configs_strings(R.drawable.listviewtest,"Cambiar contraseña"));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 5)
+                {
+                    AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
+                    eliminar.setMessage("Esta accion es permanente, perdera todos sus datos.")
+                            .setCancelable(false)
+                            .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //me conecto con la database y elimino rama usuario, de ahi a la activity .inicio
+                                    users.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            ObjetoUsuario userExist = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
+                                            if (userExist.getDni().equals(dni))
+                                            {
+                                                users.child(String.valueOf(dni)).removeValue();
+                                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("user", "");
+                                                editor.putString("pass", "");
+                                                editor.commit();
+                                                Intent intent =
+                                                        new Intent(getActivity(),login.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog titulo = eliminar.create();
+                    titulo.setTitle("¿Esta seguro que desea eliminar su usuario?");
+                    titulo.show();
+                }
+            }
+        });
 
         adapterConfigs = new AdapterConfigs((Activity) getContext(),configs_strings);
         listView.setAdapter(adapterConfigs);
@@ -101,7 +170,7 @@ public class User_config extends Fragment
         );*/
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_config, container, false);
+        return  v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
