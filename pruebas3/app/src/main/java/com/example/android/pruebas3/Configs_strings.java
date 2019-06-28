@@ -1,6 +1,6 @@
 package com.example.android.pruebas3;
 
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.Drawable;
 
 public class Configs_strings
 {
