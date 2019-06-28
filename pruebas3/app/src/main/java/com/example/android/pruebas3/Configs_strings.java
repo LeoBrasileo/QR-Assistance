@@ -2,8 +2,6 @@ package com.example.android.pruebas3;
 
 import android.graphics.drawable.Drawable;
 
-//probando
-
 public class Configs_strings
 {
     int imagen;
