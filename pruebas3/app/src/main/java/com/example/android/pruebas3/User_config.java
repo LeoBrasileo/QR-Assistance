@@ -32,14 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link User_config.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link User_config#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class User_config extends Fragment
 {
     // TODO: Rename parameter arguments, choose names that match
@@ -61,15 +53,6 @@ public class User_config extends Fragment
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment User_config.
-     */
-    // TODO: Rename and change types and number of parameters
     public static User_config newInstance(String param1, String param2) {
         User_config fragment = new User_config();
         Bundle args = new Bundle();
