@@ -96,6 +96,13 @@ public class User_config extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                if (position ==2)
+                {
+                    Intent intent =
+                            new Intent(getActivity(),Change_pass.class);
+                    startActivity(intent);
+                }
+
                 if (position == 5)
                 {
                     AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
