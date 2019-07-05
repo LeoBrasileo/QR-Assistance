@@ -127,18 +127,19 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
             {
                 ObjetoQR qr = dataSnapshot.getValue(ObjetoQR.class);
 
-                //Toast.makeText(getContext(),qr.getNumeros(),Toast.LENGTH_LONG).show();
-
                 if (qr.getNumeros().equals(result.toString()))
                 {
-                    Toast.makeText(getContext(),"ESTO FUNCIONA",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
+                }else
+                {
+                    Toast.makeText(getContext(),"Error en el escaneo, vuelva a intentar",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
         });
 
