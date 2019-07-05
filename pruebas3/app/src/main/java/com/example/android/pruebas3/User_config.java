@@ -101,6 +101,9 @@ public class User_config extends Fragment
                 {
                     Intent intent =
                             new Intent(getActivity(),Change_pass.class);
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("dni",dni);
+                    intent.putExtras(bundle1);
                     startActivity(intent);
                 }
 
