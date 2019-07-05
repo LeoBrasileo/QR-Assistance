@@ -85,7 +85,8 @@ public class User_config extends Fragment
         final String dni = bundle.getString("dni");
 
         final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
-        configs_strings.add((new Configs_strings(R.drawable.mailfoto,"Registrar / cambiar Email")));
+        configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar email"));
+        configs_strings.add((new Configs_strings(R.drawable.mailc,"Cambiar Email")));
         configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
         configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña"));
         configs_strings.add(new Configs_strings(R.drawable.school,"Colegio"));
@@ -96,14 +97,14 @@ public class User_config extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position ==2)
+                if (position ==3)
                 {
                     Intent intent =
                             new Intent(getActivity(),Change_pass.class);
                     startActivity(intent);
                 }
 
-                if (position == 5)
+                if (position == 6)
                 {
                     AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
                     eliminar.setMessage("Esta accion es permanente, perdera todos sus datos.")
