@@ -97,7 +97,7 @@ public class User_config extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position ==3)
+                if (position == 3)
                 {
                     Intent intent =
                             new Intent(getActivity(),Change_pass.class);
