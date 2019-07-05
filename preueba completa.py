@@ -42,7 +42,7 @@ def job():
 
 
 #----------------------------------------------------------
-schedule.every(7).seconds.do(job)
+schedule.every(3).seconds.do(job)
 
 # Loop
 while True:
