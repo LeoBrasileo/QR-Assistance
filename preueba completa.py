@@ -25,8 +25,8 @@ def job():
 	msg = str (msg)
 
 	# Subo el mensaje (string) a Firebase
-	data = {"Numero": msg}
-	db.child ("Numeros").set(data)
+	data = {"numeros": msg}
+	db.child ("qrs").set(data)
 
 	# Genero el QR con el mensaje (string)
 	name = 'QR_'+msg+'.jpg'
