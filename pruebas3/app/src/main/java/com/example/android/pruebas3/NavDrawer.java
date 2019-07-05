@@ -144,8 +144,8 @@ public class NavDrawer extends AppCompatActivity
             // Handle the camera action
             fragment = new Fragment1();
             fragmentseleccionado = true;
-        } else if (id == R.id.nav_gallery) {
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_horarios) {
+        } else if (id == R.id.nav_inasistencias) {
 
         } else if (id == R.id.nav_tools) {
             fragment = new User_config();
