@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -33,7 +37,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private static final String ARG_PARAM2 = "param2";
 
     private FirebaseDatabase database;
-    private DatabaseReference QRS;
+    private DatabaseReference qrs;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -110,12 +114,33 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     }
 
     @Override
-    public void handleResult(Result result) {
-        Toast.makeText(getActivity(), "Contents = " + result.getText() +
-                ", Format = " + result.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+    public void handleResult(final Result result) {
+        //Toast.makeText(getActivity(), "Contents = " + result.getText() +
+         //       ", Format = " + result.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
 
         database = FirebaseDatabase.getInstance();
-        QRS = database.getReference("");
+        qrs = database.getReference("qrs");
+
+        qrs.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                ObjetoQR qr = dataSnapshot.getValue(ObjetoQR.class);
+
+                //Toast.makeText(getContext(),qr.getNumeros(),Toast.LENGTH_LONG).show();
+
+                if (qr.getNumeros().equals(result.toString()))
+                {
+                    Toast.makeText(getContext(),"ESTO FUNCIONA",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+
+            }
+        });
 
 
         //Toda la parte tecnica de la app se va a programar aca
