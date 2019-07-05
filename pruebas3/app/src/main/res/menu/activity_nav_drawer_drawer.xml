@@ -11,11 +11,11 @@
         <item
             android:id="@+id/nav_horarios"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Horarios" />
+            android:title="@string/menu_horarios" />
         <item
             android:id="@+id/nav_inasistencias"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Inasistencias" />
+            android:title="@string/menu_inasistencias" />
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"
