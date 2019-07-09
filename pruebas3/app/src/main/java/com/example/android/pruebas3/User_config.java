@@ -81,7 +81,7 @@ public class User_config extends Fragment
 
         database = FirebaseDatabase.getInstance();
         users = database.getReference("usuarios");
-        Bundle bundle = getActivity().getIntent().getExtras();
+        final Bundle bundle = getActivity().getIntent().getExtras();
         final String dni = bundle.getString("dni");
 
         final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
@@ -96,6 +96,31 @@ public class User_config extends Fragment
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0)
+                {
+                    users.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoUsuario addmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
+                            if (addmail.getEmail().equals(""))
+                            {
+                                Intent intent =
+                                        new Intent(getActivity(),AddMail.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }else
+                            {
+                                Toast.makeText(getContext(),"Ya se encuentra registrado un mail en esta cuenta",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
 
                 if (position == 3)
                 {
