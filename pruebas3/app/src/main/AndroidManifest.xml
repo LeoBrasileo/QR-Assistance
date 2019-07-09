@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddMail"></activity>
+        <activity android:name=".AddMail"
+            android:parentActivityName=".inicio"/>
         <activity
             android:name=".Change_pass"
             android:parentActivityName=".inicio" />
