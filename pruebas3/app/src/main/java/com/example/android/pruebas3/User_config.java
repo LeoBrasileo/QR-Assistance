@@ -157,6 +157,13 @@ public class User_config extends Fragment
                     startActivity(intent);
                 }
 
+                if (position == 5)
+                {
+                    Intent intent =
+                            new Intent(getActivity(),ConfNotificaciones.class);
+                    startActivity(intent);
+                }
+
                 if (position == 6)
                 {
                     AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
