@@ -17,6 +17,9 @@
             android:name=".Change_pass"
             android:parentActivityName=".inicio" />
         <activity
+            android:name=".ChangeMail"
+            android:parentActivityName=".inicio" />
+        <activity
             android:name=".NavDrawer"
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
