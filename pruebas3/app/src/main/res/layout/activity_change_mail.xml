@@ -40,7 +40,7 @@
         app:layout_constraintGuide_percent="0.76" />
 
     <EditText
-        android:id="@+id/addMail1"
+        android:id="@+id/ChMail1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
-        android:id="@+id/btnAddEmail"
+        android:id="@+id/btnChEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

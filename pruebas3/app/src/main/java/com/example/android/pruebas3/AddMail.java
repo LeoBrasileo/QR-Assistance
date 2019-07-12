@@ -56,7 +56,7 @@ public class AddMail extends AppCompatActivity {
             return;
         }
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Cambiando Email");
+        progressDialog.setMessage("Registrando Email");
         progressDialog.show();
         Bundle bundle = getIntent().getExtras();
         final String dni = bundle.getString("dni");
@@ -66,15 +66,15 @@ public class AddMail extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                ObjetoUsuario chmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
-                chmail.setEmail(mail);
-                users.child(dni).setValue(chmail);
+                ObjetoUsuario addmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
+                addmail.setEmail(mail);
+                users.child(dni).setValue(addmail);
                 Intent intent =
                         new Intent(AddMail.this,NavDrawer.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("user", chmail.getNombre().toString());
-                bundle.putString("mail", chmail.getEmail().toString());
-                bundle.putString("dni", chmail.getDni().toString());
+                bundle.putString("user", addmail.getNombre().toString());
+                bundle.putString("mail", addmail.getEmail().toString());
+                bundle.putString("dni", addmail.getDni().toString());
                 intent.putExtras(bundle);
                 progressDialog.dismiss();
                 startActivity(intent);

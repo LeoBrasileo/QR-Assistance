@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +25,8 @@ public class ChangeMail extends AppCompatActivity
     private Toolbar toolbar;
     private FirebaseDatabase database;
     private DatabaseReference users;
+    private EditText mail;
+    private Button validar;
 
     @Override
     protected void onCreate (Bundle savedInstanceState)
@@ -31,10 +34,19 @@ public class ChangeMail extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_mail);
         toolbar = findViewById(R.id.toolbar2);
+        mail = findViewById(R.id.ChMail1);
+        validar = findViewById(R.id.btnChEmail);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Cambiar Email");
+
+        validar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegistrarMail(mail.getText().toString());
+            }
+        });
     }
 
     private void RegistrarMail (final String mail)
@@ -45,7 +57,7 @@ public class ChangeMail extends AppCompatActivity
             return;
         }
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Registrando Email");
+        progressDialog.setMessage("Cambiando Email");
         progressDialog.show();
         Bundle bundle = getIntent().getExtras();
         final String dni = bundle.getString("dni");
@@ -55,15 +67,15 @@ public class ChangeMail extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                ObjetoUsuario addmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
-                addmail.setEmail(mail);
-                users.child(dni).setValue(addmail);
+                ObjetoUsuario chmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
+                chmail.setEmail(mail);
+                users.child(dni).setValue(chmail);
                 Intent intent =
                         new Intent(ChangeMail.this,NavDrawer.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("user", addmail.getNombre().toString());
-                bundle.putString("mail", addmail.getEmail().toString());
-                bundle.putString("dni", addmail.getDni().toString());
+                bundle.putString("user", chmail.getNombre().toString());
+                bundle.putString("mail", chmail.getEmail().toString());
+                bundle.putString("dni", chmail.getDni().toString());
                 intent.putExtras(bundle);
                 progressDialog.dismiss();
                 startActivity(intent);
