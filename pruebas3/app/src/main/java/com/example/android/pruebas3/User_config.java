@@ -122,6 +122,31 @@ public class User_config extends Fragment
                     });
                 }
 
+                if (position == 1)
+                {
+                    users.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoUsuario mail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
+                            if (mail.getEmail().equals(""))
+                            {
+                                Toast.makeText(getContext(),"No se encuentra ningun Email registrado en este usuario",Toast.LENGTH_LONG).show();
+                            }else
+                            {
+                                Intent intent =
+                                        new Intent(getActivity(),ChangeMail.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
                 if (position == 3)
                 {
                     Intent intent =
