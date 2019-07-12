@@ -8,14 +8,14 @@ import android.widget.Toast;
 public class ConfNotificaciones extends AppCompatActivity {
 private Switch Sw;
 
-String str1, str2;
+String str1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Switch sb = new Switch(this);
-        Sw = (Switch)findViewById(R.id. switch1);
+        Sw = findViewById(R.id. switch1);
         sb.setTextOff("OFF");
         sb.setTextOn("ON");
         sb.setChecked(true);
