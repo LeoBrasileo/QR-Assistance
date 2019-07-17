@@ -145,8 +145,11 @@ public class NavDrawer extends AppCompatActivity
             fragment = new Fragment1();
             fragmentseleccionado = true;
         } else if (id == R.id.nav_horarios) {
+            fragment = new Horarios();
+            fragmentseleccionado = true;
         } else if (id == R.id.nav_inasistencias) {
-
+            fragment = new Inasistencias();
+            fragmentseleccionado = true;
         } else if (id == R.id.nav_tools) {
             fragment = new User_config();
             fragmentseleccionado = true;
