@@ -45,7 +45,7 @@ import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 public class NavDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,Fragment1.OnFragmentInteractionListener,User_config.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,Fragment1.OnFragmentInteractionListener,User_config.OnFragmentInteractionListener,Horarios.OnFragmentInteractionListener,Inasistencias.OnFragmentInteractionListener {
 
     public TextView usertext;
     public TextView mailtext;
@@ -183,7 +183,6 @@ public class NavDrawer extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override
