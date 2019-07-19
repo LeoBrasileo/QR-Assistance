@@ -3,12 +3,8 @@
 
 
     <string-array name="School">
-        <item>Seleccione un colegio</item>
-        <item>ORT Almagro</item>
-        <item>ORT Belgrano</item>
-        <item>Martin Buber</item>
-        <item>Nacional Buenos Aires</item>
-        <item>Escuela tecnica Huergo</item>
+        <item>Seleccione su division</item>
+        <item>5°MA</item>
     </string-array>
     <string name="title_activity_nav_drawer"></string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

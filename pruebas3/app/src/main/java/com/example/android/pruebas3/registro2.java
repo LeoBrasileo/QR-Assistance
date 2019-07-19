@@ -100,7 +100,7 @@ public class registro2 extends AppCompatActivity {
         }
         final String nombre1;
         nombre1 = nombre + " " + apellido;
-        if (school.equals("Seleccione un colegio"))
+        if (school.equals("Seleccione su division"))
         {
             final String school1 = "";
             school = school1;

@@ -89,7 +89,7 @@ public class User_config extends Fragment
         configs_strings.add((new Configs_strings(R.drawable.mailc,"Cambiar Email")));
         configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
         configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña"));
-        configs_strings.add(new Configs_strings(R.drawable.school,"Colegio"));
+        configs_strings.add(new Configs_strings(R.drawable.school,"Division"));
         configs_strings.add(new Configs_strings(R.drawable.notificacion,"Notificaciones"));
         configs_strings.add(new Configs_strings(R.drawable.tachoide, "Eliminar usuario"));
 
