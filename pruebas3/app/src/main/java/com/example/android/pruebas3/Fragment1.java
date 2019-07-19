@@ -139,13 +139,29 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                 {
                     Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
                     Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                    String hora1 = format.format(calendar.getTime());
+                    SimpleDateFormat formathora = new SimpleDateFormat("HH");
+                    String hora1 = formathora.format(calendar.getTime());
+                    SimpleDateFormat formatminutos = new SimpleDateFormat("mm");
+                    String min1 = formatminutos.format(calendar.getTime());
+                    SimpleDateFormat formatsec = new SimpleDateFormat("ss");
+                    String sec1 = formatsec.format(calendar.getTime());
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
 
-                    hora.setValue(hora1);
+                    String horatotal = hora1 + ":" + min1 + ":" + sec1;
+                    String horamin1 = hora1 + min1;
+                    int horamin = Integer.valueOf(horamin1);
+
+                    hora.setValue(horatotal);
                     día.setValue(day);
+
+                    if (day == "viernes")
+                    {
+                        if (horamin > 0745 && horamin < 1405)
+                        {
+                            Toast.makeText(getContext(),horamin1,Toast.LENGTH_LONG).show();
+                        }
+                    }
 
                 }else
                 {
