@@ -138,26 +138,29 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                 if (qr.getNumeros().equals(result.toString()))
                 {
                     Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
+
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat formathora = new SimpleDateFormat("HH");
-                    String hora1 = formathora.format(calendar.getTime());
                     SimpleDateFormat formatminutos = new SimpleDateFormat("mm");
-                    String min1 = formatminutos.format(calendar.getTime());
                     SimpleDateFormat formatsec = new SimpleDateFormat("ss");
+                    String hora1 = formathora.format(calendar.getTime());
+                    String min1 = formatminutos.format(calendar.getTime());
                     String sec1 = formatsec.format(calendar.getTime());
+                    String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
 
-                    String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String horamin1 = hora1 + min1;
                     int horamin = Integer.valueOf(horamin1);
 
                     hora.setValue(horatotal);
                     día.setValue(day);
 
+                    //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agreg al usuario loguado a la materia que se este dando en ese horario
+
                     if (day == "viernes")
                     {
-                        if (horamin > 0745 && horamin < 1405)
+                        if (horamin > 0745 && horamin < 1725)
                         {
                             Toast.makeText(getContext(),horamin1,Toast.LENGTH_LONG).show();
                         }
