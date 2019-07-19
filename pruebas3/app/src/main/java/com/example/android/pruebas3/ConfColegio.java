@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -33,10 +34,20 @@ public class ConfColegio extends AppCompatActivity
         validar = findViewById(R.id.btnColegios1);
         colegios = findViewById(R.id.spinnerColegios2);
         toolbar = findViewById(R.id.toolbar2);
+        progressDialog = new ProgressDialog(this);
+        database = FirebaseDatabase.getInstance();
+        users = database.getReference("usuarios");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Registrar / Cambiar division");
+
+        validar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDivision(colegios.getSelectedItem().toString());
+            }
+        });
     }
 
     private void setDivision (final String school)

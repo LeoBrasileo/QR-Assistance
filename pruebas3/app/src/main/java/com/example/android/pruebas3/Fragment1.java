@@ -2,10 +2,12 @@ package com.example.android.pruebas3;
 
 import android.content.Context;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandler
@@ -28,9 +35,12 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
     private FirebaseDatabase database;
     private DatabaseReference qrs;
+    private DatabaseReference hora;
+    private DatabaseReference día;
 
     private String mParam1;
     private String mParam2;
+    private static final String LOGTAG = "LogsAndroid";
 
     private OnFragmentInteractionListener mListener;
     private ZXingScannerView zXingScannerView;
@@ -116,6 +126,8 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
         database = FirebaseDatabase.getInstance();
         qrs = database.getReference("qrs");
+        hora = database.getReference("hora");
+        día = database.getReference("día");
 
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -126,6 +138,15 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                 if (qr.getNumeros().equals(result.toString()))
                 {
                     Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                    String hora1 = format.format(calendar.getTime());
+                    String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
+                    String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
+
+                    hora.setValue(hora1);
+                    día.setValue(day);
+
                 }else
                 {
                     Toast.makeText(getContext(),"Error en el escaneo, vuelva a intentar",Toast.LENGTH_LONG).show();

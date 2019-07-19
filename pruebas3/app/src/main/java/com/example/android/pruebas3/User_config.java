@@ -157,6 +157,15 @@ public class User_config extends Fragment
                     startActivity(intent);
                 }
 
+                if (position == 4)
+                {
+                    Intent intent =
+                            new Intent(getActivity(),ConfColegio.class);
+                    bundle.putString("dni",dni);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
                 if (position == 5)
                 {
                     Intent intent =
