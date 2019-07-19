@@ -145,7 +145,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                 if (qr.getNumeros().equals(result.toString()))
                 {
-                    Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(),"ESTO FUNCIONA (Estas presente)",Toast.LENGTH_LONG).show();
 
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat formathora = new SimpleDateFormat("HH");
@@ -194,19 +194,23 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             materiaact = division.child(day);
-                            materiaact1 = materiaact.child(materia);
-                            materiaact1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
-                                    materiaact1.setValue(presensia);
-                                }
+                            if (dataSnapshot.child(materia).exists())
+                            {
+                                materiaact1 = materiaact.child(materia);
+                                materiaact1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
+                                        materiaact1.setValue(presensia);
+                                        Toast.makeText(getContext(),"Presencia tomada",Toast.LENGTH_LONG).show();
+                                    }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
+                                    }
+                                });
+                            }
                         }
 
                         @Override
