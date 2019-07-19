@@ -1,6 +1,7 @@
 package com.example.android.pruebas3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -37,6 +38,10 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference qrs;
     private DatabaseReference hora;
     private DatabaseReference día;
+    private DatabaseReference division;
+    private DatabaseReference materiaact;
+    private DatabaseReference materiaact1;
+    private String materia = "";
 
     private String mParam1;
     private String mParam2;
@@ -123,11 +128,14 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     public void handleResult(final Result result) {
         //Toast.makeText(getActivity(), "Contents = " + result.getText() +
          //       ", Format = " + result.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+        final Bundle bundle = getActivity().getIntent().getExtras();
+        final String div = bundle.getString("div");
 
         database = FirebaseDatabase.getInstance();
         qrs = database.getReference("qrs");
         hora = database.getReference("hora");
         día = database.getReference("día");
+        division = database.getReference(div);
 
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -148,7 +156,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     String sec1 = formatsec.format(calendar.getTime());
                     String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
-                    String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
+                    final String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
 
                     String horamin1 = hora1 + min1;
                     int horamin = Integer.valueOf(horamin1);
@@ -156,7 +164,56 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     hora.setValue(horatotal);
                     día.setValue(day);
 
+                    if (horamin > 0745 && horamin < 905)
+                    {
+                        materia = "1";
+                    }else if (horamin > 905 && horamin < 1040)
+                    {
+                        materia = "2";
+                    }else if (horamin > 1040 && horamin < 1215)
+                    {
+                        materia = "3";
+                    }else if (horamin > 1310 && horamin < 1430)
+                    {
+                        materia = "4";
+                    }else if (horamin > 1430 && horamin < 1600)
+                    {
+                        materia = "5";
+                    }else if (horamin > 1600 && horamin < 1730)
+                    {
+                        materia = "6";
+                    }else if (horamin > 1730 && horamin < 2300)
+                    {
+                        materia = "prueba";
+                    }
+
+
                     //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agreg al usuario loguado a la materia que se este dando en ese horario
+
+                    division.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            materiaact = division.child(day);
+                            materiaact1 = materiaact.child(materia);
+                            materiaact1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
+                                    materiaact1.setValue(presensia);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
 
                     if (day == "viernes")
                     {

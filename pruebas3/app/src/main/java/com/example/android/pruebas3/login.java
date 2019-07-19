@@ -146,6 +146,7 @@ public class login extends AppCompatActivity {
                             bundle.putString("user", login1.getNombre().toString());
                             bundle.putString("mail", login1.getEmail().toString());
                             bundle.putString("dni", login1.getDni().toString());
+                            bundle.putString("div", login1.getSchool().toString());
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }else
