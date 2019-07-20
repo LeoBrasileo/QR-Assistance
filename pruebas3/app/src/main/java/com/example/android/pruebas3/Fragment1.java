@@ -200,8 +200,10 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                 materiaact1.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
-                                        materiaact1.setValue(presensia);
+                                        ObjetoPresensia presentes = dataSnapshot.getValue(ObjetoPresensia.class);
+                                        //ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
+                                        presentes.setAlumno(bundle.getString("user"));
+                                        materiaact1.setValue(presentes);
                                         Toast.makeText(getContext(),"Presencia tomada",Toast.LENGTH_LONG).show();
                                     }
 
