@@ -39,9 +39,9 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference hora;
     private DatabaseReference día;
     private DatabaseReference division;
-    private DatabaseReference materiaact;
+    private DatabaseReference diaactual;
     private DatabaseReference materiaact1;
-    private String materia = "";
+    private String horariosmaterias = "";
 
     private String mParam1;
     private String mParam2;
@@ -166,25 +166,25 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                     if (horamin > 0745 && horamin < 905)
                     {
-                        materia = "1";
+                        horariosmaterias = "1";
                     }else if (horamin > 905 && horamin < 1040)
                     {
-                        materia = "2";
+                        horariosmaterias = "2";
                     }else if (horamin > 1040 && horamin < 1215)
                     {
-                        materia = "3";
+                        horariosmaterias = "3";
                     }else if (horamin > 1310 && horamin < 1430)
                     {
-                        materia = "4";
+                        horariosmaterias = "4";
                     }else if (horamin > 1430 && horamin < 1600)
                     {
-                        materia = "5";
+                        horariosmaterias = "5";
                     }else if (horamin > 1600 && horamin < 1730)
                     {
-                        materia = "6";
-                    }else if (horamin > 1730 && horamin < 2300)
+                        horariosmaterias = "6";
+                    }else if (horamin > 1730 && horamin < 2359)
                     {
-                        materia = "prueba";
+                        horariosmaterias = "prueba";
                     }
 
 
@@ -193,41 +193,40 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     division.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            materiaact = division.child(day);
-                            if (dataSnapshot.child(materia).exists())
-                            {
-                                materiaact1 = materiaact.child(materia);
-                                materiaact1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        ObjetoPresensia presentes = dataSnapshot.getValue(ObjetoPresensia.class);
-                                        //ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
-                                        presentes.setAlumno(bundle.getString("user"));
-                                        materiaact1.setValue(presentes);
-                                        Toast.makeText(getContext(),"Presencia tomada",Toast.LENGTH_LONG).show();
-                                    }
+                            diaactual = division.child(day);
+                            diaactual.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    //if (dataSnapshot.child(horariosmaterias).exists())
+                                    //{
+                                        materiaact1 = diaactual.child(horariosmaterias);
+                                        materiaact1.addListenerForSingleValueEvent(new ValueEventListener()
+                                        {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                            {
+                                                ObjetoPresensia presentes = dataSnapshot.getValue(ObjetoPresensia.class);
+                                                //ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
+                                                presentes.setAlumno(bundle.getString("user").toString());
+                                                materiaact1.setValue(presentes);
+                                                Toast.makeText(getContext(),"Presencia tomada",Toast.LENGTH_LONG).show();
+                                            }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                        });
+                                    //}
+                                }
 
-                                    }
-                                });
-                            }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) { }
+                            });
+
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
                     });
-
-                    if (day == "viernes")
-                    {
-                        if (horamin > 0745 && horamin < 1725)
-                        {
-                            Toast.makeText(getContext(),horamin1,Toast.LENGTH_LONG).show();
-                        }
-                    }
 
                 }else
                 {
