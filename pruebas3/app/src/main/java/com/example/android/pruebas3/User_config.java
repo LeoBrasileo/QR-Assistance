@@ -222,14 +222,6 @@ public class User_config extends Fragment
 
         adapterConfigs = new AdapterConfigs((Activity) getContext(),configs_strings);
         listView.setAdapter(adapterConfigs);
-
-        /*ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                menuItems
-        );*/
-
-        // Inflate the layout for this fragment
         return  v;
     }
 
