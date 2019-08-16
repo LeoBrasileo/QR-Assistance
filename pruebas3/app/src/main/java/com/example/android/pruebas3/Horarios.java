@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,6 +45,11 @@ public class Horarios extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private TextView bienvDiv;
     private ListView listView;
+    private AdapterHorarios adapter;
+    private FirebaseDatabase database;
+    private DatabaseReference todo;
+    private DatabaseReference division;
+    private DatabaseReference dia;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,6 +79,183 @@ public class Horarios extends Fragment {
         return fragment;
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item)
+        {
+
+            final Bundle bundle = getActivity().getIntent().getExtras();
+            final String div = bundle.getString("div");
+            division = todo.child(div);
+
+            switch (item.getItemId()) {
+                case R.id.navigation_lunes:
+                    dia = division.child("lunes");
+                    dia.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                            //ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                            //ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                            ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                            adapter = new AdapterHorarios(getActivity(),materias);
+                            listView.setAdapter(adapter);
+
+                            materias.clear();
+                            materias.add(new ObjetoHorariosMaterias("","                 Lunes", ""));
+                            materias.add(mat1);
+                            materias.add(mat2);
+                            materias.add(mat3);
+                            materias.add(mat4);
+                            //materias.add(mat5);
+                            //materias.add(mat6);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    return true;
+                case R.id.navigation_martes:
+                    dia = division.child("martes");
+                    dia.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                            ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                            adapter = new AdapterHorarios(getActivity(),materias);
+                            listView.setAdapter(adapter);
+
+                            materias.clear();
+                            materias.add(new ObjetoHorariosMaterias("","                 Martes", ""));
+                            materias.add(mat1);
+                            materias.add(mat2);
+                            materias.add(mat3);
+                            materias.add(mat4);
+                            materias.add(mat5);
+                            materias.add(mat6);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    return true;
+                case R.id.navigation_miercoles:
+                    dia = division.child("miercoles");
+                    dia.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                            ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                            adapter = new AdapterHorarios(getActivity(),materias);
+                            listView.setAdapter(adapter);
+
+                            materias.clear();
+                            materias.add(new ObjetoHorariosMaterias("","                 Miercoles", ""));
+                            materias.add(mat1);
+                            materias.add(mat2);
+                            materias.add(mat3);
+                            materias.add(mat4);
+                            materias.add(mat5);
+                            materias.add(mat6);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    return true;
+                case R.id.navigation_jueves:
+                    dia = division.child("jueves");
+                    dia.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                            ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                            adapter = new AdapterHorarios(getActivity(),materias);
+                            listView.setAdapter(adapter);
+
+                            materias.clear();
+                            materias.add(new ObjetoHorariosMaterias("","                 Jueves", ""));
+                            materias.add(mat1);
+                            materias.add(mat2);
+                            materias.add(mat3);
+                            materias.add(mat4);
+                            materias.add(mat5);
+                            materias.add(mat6);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    return true;
+                case R.id.navigation_viernes:
+                    dia = division.child("viernes");
+                    dia.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                            ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                            //ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                            //ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                            //ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                            ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                            adapter = new AdapterHorarios(getActivity(),materias);
+                            listView.setAdapter(adapter);
+
+                            materias.clear();
+                            materias.add(new ObjetoHorariosMaterias("","                 Viernes", ""));
+                            materias.add(mat1);
+                            materias.add(mat2);
+                            materias.add(mat3);
+                            //materias.add(mat4);
+                            //materias.add(mat5);
+                            //materias.add(mat6);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    return true;
+            }
+            return false;
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +267,14 @@ public class Horarios extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_horarios, container, false);
 
         final Bundle bundle = getActivity().getIntent().getExtras();
         final String div = bundle.getString("div");
+
+        database = FirebaseDatabase.getInstance();
+        todo = database.getReference();
 
         bottomNavigationView = v.findViewById(R.id.nav_view);
         listView = v.findViewById(R.id.listHorarios);
@@ -92,36 +284,29 @@ public class Horarios extends Fragment {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         // Configurar la vista
         return v;
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    public void getupdates(DataSnapshot dataSnapshot)
+    {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_lunes:
-                    Toast.makeText(getContext(),"casa",Toast.LENGTH_LONG).show();
-                    return true;
-                case R.id.navigation_martes:
-                    Toast.makeText(getContext(),"cuadrados",Toast.LENGTH_LONG).show();
-                    return true;
-                case R.id.navigation_miercoles:
-                    Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
-                    return true;
-                case R.id.navigation_jueves:
-                    Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
-                    return true;
-                case R.id.navigation_viernes:
-                    Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
-                    return true;
-            }
-            return false;
+        ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+        adapter = new AdapterHorarios(getActivity(),materias);
+        listView.setAdapter(adapter);
+
+        materias.clear();
+        materias.add(new ObjetoHorariosMaterias("Materia:","Horario:", ""));
+
+        for (DataSnapshot ds : dataSnapshot.getChildren())
+        {
+            ObjetoHorariosMaterias d = new ObjetoHorariosMaterias();
+            d.setHorario(ds.getValue(ObjetoHorariosMaterias.class).getHorario());
+            d.setId(ds.getValue(ObjetoHorariosMaterias.class).getId());
+            d.setNumero(ds.getValue(ObjetoHorariosMaterias.class).getNumero());
+            materias.add(d);
         }
-    };
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -147,16 +332,6 @@ public class Horarios extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -205,6 +380,8 @@ public class Horarios extends Fragment {
             }
 
             holder.txtNombreMateria.setText(listHorarios.get(position).getId());
+            holder.txtHorarioReal.setText(listHorarios.get(position).getHorario());
+            holder.txtNumBloque.setText(listHorarios.get(position).getNumero());
             return(item);
         }
     }

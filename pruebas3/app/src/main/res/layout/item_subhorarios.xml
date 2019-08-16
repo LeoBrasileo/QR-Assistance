@@ -2,213 +2,51 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/imageView31"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView32"
-        android:layout_width="40dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView33"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView33"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView31"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView34"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView35"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView35"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView32"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView36"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/imageView37"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView37"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView38"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView38"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView34"
-        app:srcCompat="@drawable/linea_recta" />
+    android:layout_width="match_parent"
+    android:layout_height="65dp">
 
     <TextView
         android:id="@+id/textViewBloque"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="17dp"
         android:text="Bloque"
+        android:textColor="#3F51B5"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewHoraReal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="17dp"
         android:text="Hora real"
+        android:textColor="#030000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewBloque"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewMateria"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="17dp"
         android:text="Materia"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewHoraReal"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/linea_recta" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.31" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.61" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
