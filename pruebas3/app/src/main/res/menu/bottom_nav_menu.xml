@@ -2,18 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="casa" />
+        android:id="@+id/navigation_lunes"
+        android:icon="@drawable/ic_action_lunes"
+        android:title="Lunes" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="cuadrados" />
+        android:id="@+id/navigation_martes"
+        android:icon="@drawable/ic_action_martes"
+        android:title="Martes" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="campana" />
+        android:id="@+id/navigation_miercoles"
+        android:icon="@drawable/ic_action_miercoles"
+        android:title="Miercoles" />
+    <item
+        android:id="@+id/navigation_jueves"
+        android:icon="@drawable/ic_action_jueves"
+        android:title="Jueves" />
+    <item
+        android:id="@+id/navigation_viernes"
+        android:icon="@drawable/ic_action_viernes"
+        android:title="Viernes" />
 
 </menu>

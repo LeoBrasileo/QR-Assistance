@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,6 +30,8 @@ public class Horarios extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private BottomNavigationView bottomNavigationView;
+    private TextView bienvDiv;
+    private ListView listView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -70,9 +74,17 @@ public class Horarios extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_user_config, container, false);
+        View v = inflater.inflate(R.layout.fragment_horarios, container, false);
+
+        final Bundle bundle = getActivity().getIntent().getExtras();
+        final String div = bundle.getString("div");
 
         bottomNavigationView = v.findViewById(R.id.nav_view);
+        listView = v.findViewById(R.id.listHorarios);
+        bienvDiv = v.findViewById(R.id.textViewBienvDiv);
+
+        bienvDiv.setText("Lista de horarios de " + div);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
@@ -86,13 +98,19 @@ public class Horarios extends Fragment {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_lunes:
                     Toast.makeText(getContext(),"casa",Toast.LENGTH_LONG).show();
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_martes:
                     Toast.makeText(getContext(),"cuadrados",Toast.LENGTH_LONG).show();
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_miercoles:
+                    Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.navigation_jueves:
+                    Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.navigation_viernes:
                     Toast.makeText(getContext(),"campanas",Toast.LENGTH_LONG).show();
                     return true;
             }
