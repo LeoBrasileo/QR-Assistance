@@ -20,7 +20,6 @@ public class inicio extends AppCompatActivity implements ZXingScannerView.Result
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //safe commit
         setContentView(R.layout.activity_inicio);
 
         scan = findViewById(R.id.btn5);
