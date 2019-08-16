@@ -1,5 +1,6 @@
 package com.example.android.pruebas3;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,9 +11,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -155,5 +160,52 @@ public class Horarios extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    class AdapterHorarios extends ArrayAdapter<ObjetoHorariosMaterias>
+    {
+
+        private Activity context;
+        private ArrayList<ObjetoHorariosMaterias> listHorarios;
+
+        class ViewHolder
+        {
+            TextView txtNumBloque;
+            TextView txtHorarioReal;
+            TextView txtNombreMateria;
+
+        }
+
+        AdapterHorarios(Activity context,ArrayList<ObjetoHorariosMaterias> listHorarios)
+        {
+            super(context, R.layout.item_subhorarios, listHorarios);
+            this.context = context;
+            this.listHorarios = listHorarios;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View item = convertView;
+            NavDrawer.AdapterHorarios.ViewHolder holder;
+
+            if(item == null)
+            {
+                LayoutInflater inflater = context.getLayoutInflater();
+                item = inflater.inflate(R.layout.item_subhorarios, null);
+
+                holder = new NavDrawer.AdapterHorarios.ViewHolder();
+                holder.txtNumBloque = item.findViewById(R.id.textViewBloque);
+                holder.txtHorarioReal = item.findViewById(R.id.textViewHoraReal);
+                holder.txtNombreMateria = item.findViewById(R.id.textViewMateria);
+                item.setTag(holder);
+            }
+            else
+            {
+                holder = (NavDrawer.AdapterHorarios.ViewHolder)item.getTag();
+            }
+
+            holder.txtNombreMateria.setText(listHorarios.get(position).getId());
+            return(item);
+        }
     }
 }

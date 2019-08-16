@@ -252,4 +252,50 @@ public class NavDrawer extends AppCompatActivity
         }
     }
 
+    static class AdapterHorarios extends ArrayAdapter<ObjetoHorariosMaterias>
+    {
+
+        private Activity context;
+        private ArrayList<ObjetoHorariosMaterias> listHorarios;
+
+        static class ViewHolder
+        {
+            TextView txtNumBloque;
+            TextView txtHorarioReal;
+            TextView txtNombreMateria;
+
+        }
+
+        AdapterHorarios(Activity context,ArrayList<ObjetoHorariosMaterias> listHorarios)
+        {
+            super(context, R.layout.item_subhorarios, listHorarios);
+            this.context = context;
+            this.listHorarios = listHorarios;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View item = convertView;
+            NavDrawer.AdapterHorarios.ViewHolder holder;
+
+            if(item == null)
+            {
+                LayoutInflater inflater = context.getLayoutInflater();
+                item = inflater.inflate(R.layout.item_subhorarios, null);
+
+                holder = new NavDrawer.AdapterHorarios.ViewHolder();
+                holder.txtNumBloque = item.findViewById(R.id.textViewBloque);
+                holder.txtHorarioReal = item.findViewById(R.id.textViewHoraReal);
+                holder.txtNombreMateria = item.findViewById(R.id.textViewMateria);
+                item.setTag(holder);
+            }
+            else
+            {
+                holder = (NavDrawer.AdapterHorarios.ViewHolder)item.getTag();
+            }
+
+            holder.txtNombreMateria.setText(listHorarios.get(position).getId());
+            return(item);
+        }
+    }
 }
