@@ -13,7 +13,6 @@ public class ConfNotificaciones extends AppCompatActivity {
     Switch switchButton;
     public boolean Notificaciones = false;
 
-    //ESto ew unq prueba y escribo bien perron
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
