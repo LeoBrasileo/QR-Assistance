@@ -13,7 +13,6 @@ public class ConfNotificaciones extends AppCompatActivity {
     public boolean Notificaciones = false;
     private Toolbar toolbar;
 
-    //Lolazo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
