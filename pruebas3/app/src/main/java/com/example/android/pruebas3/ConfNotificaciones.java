@@ -18,8 +18,9 @@ public class ConfNotificaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
-
         switchButton = (Switch) findViewById(R.id.switchButton);
+
+        //Funciona el GitHubddeed
 
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
