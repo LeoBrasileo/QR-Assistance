@@ -41,6 +41,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference division;
     private DatabaseReference diaactual;
     private DatabaseReference materiaact1;
+    private DatabaseReference fecha;
     private String horariosmaterias = "";
 
     private String mParam1;
@@ -136,7 +137,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
         hora = database.getReference("hora");
         día = database.getReference("día");
         division = database.getReference(div);
-
+        fecha = database.getReference("fecha");
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -157,6 +158,8 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     final String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
+                    int ifecha = calendar.get(Calendar.DAY_OF_MONTH);
+                    fecha.setValue(ifecha);
 
                     String horamin1 = hora1 + min1;
                     int horamin = Integer.valueOf(horamin1);
