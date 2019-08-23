@@ -14,7 +14,8 @@
         <activity
             android:name=".ConfColegio"
             android:parentActivityName=".inicio"></activity>
-        <activity android:name=".ConfNotificaciones" />
+        <activity android:name=".ConfNotificaciones"
+            android:parentActivityName=".inicio"/>
         <activity
             android:name=".AddMail"
             android:parentActivityName=".inicio" />
