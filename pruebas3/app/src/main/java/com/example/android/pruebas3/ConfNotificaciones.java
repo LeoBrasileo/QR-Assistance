@@ -13,7 +13,7 @@ public class ConfNotificaciones extends AppCompatActivity {
     public boolean Notificaciones = false;
     private Toolbar toolbar;
 
-    //Prueba de GitHub
+    //Prueba de GitHub2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
