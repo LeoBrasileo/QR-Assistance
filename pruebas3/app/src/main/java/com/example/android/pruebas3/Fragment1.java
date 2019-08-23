@@ -159,13 +159,15 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     final String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
                     int ifecha = calendar.get(Calendar.DAY_OF_MONTH);
-                    fecha.setValue(ifecha);
+                    int idiames = calendar.get(Calendar.MONTH) + 1;
 
                     String horamin1 = hora1 + min1;
                     int horamin = Integer.valueOf(horamin1);
+                    String fechar = String.valueOf(ifecha) + "/" + String.valueOf(idiames);
 
                     hora.setValue(horatotal);
                     día.setValue(day);
+                    fecha.setValue(fechar);
 
                     if (horamin > 0745 && horamin < 905)
                     {
@@ -211,7 +213,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                                 ObjetoPresensia presentes = dataSnapshot.getValue(ObjetoPresensia.class);
                                                 //ObjetoPresensia presensia = new ObjetoPresensia(bundle.getString("user"));
                                                 presentes.setAlumno(bundle.getString("user").toString());
-                                                materiaact1.setValue(presentes);
+                                                //materiaact1.setValue(presentes);
                                                 Toast.makeText(getContext(),"Presencia tomada",Toast.LENGTH_LONG).show();
                                             }
 
