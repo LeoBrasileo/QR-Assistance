@@ -38,11 +38,13 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference qrs;
     private DatabaseReference hora;
     private DatabaseReference día;
+    private DatabaseReference inasistencias;
     private DatabaseReference division;
     private DatabaseReference diaactual;
     private DatabaseReference materiaact1;
     private DatabaseReference fecha;
     private String horariosmaterias = "";
+    private String fechachild = "";
 
     private String mParam1;
     private String mParam2;
@@ -138,6 +140,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
         día = database.getReference("día");
         division = database.getReference(div);
         fecha = database.getReference("fecha");
+        inasistencias = database.getReference("inasistencias").child(div);
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -163,7 +166,47 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                     String horamin1 = hora1 + min1;
                     int horamin = Integer.valueOf(horamin1);
-                    String fechar = String.valueOf(ifecha) + "/" + String.valueOf(idiames);
+                    final String fechar = String.valueOf(ifecha) + "/" + String.valueOf(idiames);
+
+                    switch (idiames)
+                    {
+                        case 1:
+                            fechachild = String.valueOf(ifecha) + "ene";
+                            break;
+                        case 2:
+                            fechachild = String.valueOf(ifecha) + "feb";
+                            break;
+                        case 3:
+                            fechachild = String.valueOf(ifecha) + "mar";
+                            break;
+                        case 4:
+                            fechachild = String.valueOf(ifecha) + "apr";
+                            break;
+                        case 5:
+                            fechachild = String.valueOf(ifecha) + "may";
+                            break;
+                        case 6:
+                            fechachild = String.valueOf(ifecha) + "jun";
+                            break;
+                        case 7:
+                            fechachild = String.valueOf(ifecha) + "jul";
+                            break;
+                        case 8:
+                            fechachild = String.valueOf(ifecha) + "ago";
+                            break;
+                        case 9:
+                            fechachild = String.valueOf(ifecha) + "sep";
+                            break;
+                        case 10:
+                            fechachild = String.valueOf(ifecha) + "oct";
+                            break;
+                        case 11:
+                            fechachild = String.valueOf(ifecha) + "nov";
+                            break;
+                        case 12:
+                            fechachild = String.valueOf(ifecha) + "dec";
+                            break;
+                    }
 
                     hora.setValue(horatotal);
                     día.setValue(day);
@@ -195,10 +238,10 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                     //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agreg al usuario loguado a la materia que se este dando en ese horario
 
-                    division.addListenerForSingleValueEvent(new ValueEventListener() {
+                    inasistencias.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            diaactual = division.child(day);
+                            diaactual = division.child(fechachild).child(day);
                             diaactual.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
