@@ -19,8 +19,6 @@ public class ConfNotificaciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
 
-
-
         switchButton = (Switch) findViewById(R.id.switchButton);
 
         toolbar = findViewById(R.id.toolbar2);
