@@ -258,13 +258,11 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     DatabaseReference inasistenciaramamateria = inasistencias.child(idActual);
                                     DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
 
-                                    //inasistenciaramadia.child("presentes").setValue(bundle.getString("user"));
                                     inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
 
                                     Toast.makeText(getContext(),"Estas presente",Toast.LENGTH_LONG).show();
 
                                     //tengo que conseguir el dato de cuanto alumnos ya se marcaron presentes y segun eso agregar al proximo
-
                                     //si ya se presentaron 5 alumnos entonces el proximo que se presente se va a guardar
                                     //en el valor de la rama String Presente6.
                                 }
@@ -291,12 +289,6 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                 Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
         });
-
-
-        //Toda la parte tecnica de la app se va a programar aca
-
-
-
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()
