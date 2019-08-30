@@ -158,7 +158,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     String hora1 = formathora.format(calendar.getTime());
                     String min1 = formatminutos.format(calendar.getTime());
                     String sec1 = formatsec.format(calendar.getTime());
-                    String horatotal = hora1 + ":" + min1 + ":" + sec1;
+                    final String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     final String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
                     int ifecha = calendar.get(Calendar.DAY_OF_MONTH);
@@ -259,7 +259,10 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
 
                                     //inasistenciaramadia.child("presentes").setValue(bundle.getString("user"));
-                                    inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
+
+                                    ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
+                                    //inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
+                                    inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
 
                                     Toast.makeText(getContext(),"Estas presente",Toast.LENGTH_LONG).show();
 
