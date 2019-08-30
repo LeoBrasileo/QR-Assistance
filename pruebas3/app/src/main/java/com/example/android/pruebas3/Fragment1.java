@@ -258,10 +258,9 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     DatabaseReference inasistenciaramamateria = inasistencias.child(idActual);
                                     DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
 
-                                    //inasistenciaramadia.child("presentes").setValue(bundle.getString("user"));
+                                    //inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
 
                                     ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
-                                    //inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
                                     inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
 
                                     Toast.makeText(getContext(),"Estas presente",Toast.LENGTH_LONG).show();
