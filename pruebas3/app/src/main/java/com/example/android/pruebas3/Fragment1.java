@@ -263,18 +263,10 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                                     Toast.makeText(getContext(),"Estas presente",Toast.LENGTH_LONG).show();
 
-                                    inasistenciaramadia.child("presentes").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            //tengo que conseguir el dato de cuanto alumnos ya se marcaron presentes y segun eso agregar al proximo
+                                    //tengo que conseguir el dato de cuanto alumnos ya se marcaron presentes y segun eso agregar al proximo
 
-                                            //si ya se presentaron 5 alumnos entonces el proximo que se presente se va a guardar
-                                            //en el valor de la rama String Presente6.
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
-                                    });
+                                    //si ya se presentaron 5 alumnos entonces el proximo que se presente se va a guardar
+                                    //en el valor de la rama String Presente6.
                                 }
 
                                 @Override
