@@ -158,7 +158,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     String hora1 = formathora.format(calendar.getTime());
                     String min1 = formatminutos.format(calendar.getTime());
                     String sec1 = formatsec.format(calendar.getTime());
-                    String horatotal = hora1 + ":" + min1 + ":" + sec1;
+                    final String horatotal = hora1 + ":" + min1 + ":" + sec1;
                     String[] dias = new String[] { "sabado", "domingo", "lunes", "martes", "miercoles", "jueves", "viernes" };
                     final String day = dias[calendar.get(Calendar.DAY_OF_WEEK)];
                     int ifecha = calendar.get(Calendar.DAY_OF_MONTH);
@@ -258,13 +258,25 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     DatabaseReference inasistenciaramamateria = inasistencias.child(idActual);
                                     DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
 
-                                    inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
+                                    //inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(bundle.getString("user"));
+
+                                    ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
+                                    inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
 
                                     Toast.makeText(getContext(),"Estas presente",Toast.LENGTH_LONG).show();
 
-                                    //tengo que conseguir el dato de cuanto alumnos ya se marcaron presentes y segun eso agregar al proximo
-                                    //si ya se presentaron 5 alumnos entonces el proximo que se presente se va a guardar
-                                    //en el valor de la rama String Presente6.
+                                    inasistenciaramadia.child("presentes").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            //tengo que conseguir el dato de cuanto alumnos ya se marcaron presentes y segun eso agregar al proximo
+
+                                            //si ya se presentaron 5 alumnos entonces el proximo que se presente se va a guardar
+                                            //en el valor de la rama String Presente6.
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                    });
                                 }
 
                                 @Override
@@ -289,6 +301,12 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                 Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
         });
+
+
+        //Toda la parte tecnica de la app se va a programar aca
+
+
+
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()

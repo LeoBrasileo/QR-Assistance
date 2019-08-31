@@ -92,6 +92,18 @@ public class NavDrawer extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,fragment).commit();
     }
 
+    public void onClick(View v)
+    {
+        Bundle bundle = this.getIntent().getExtras();
+        if (mailtext.getText().toString().equals("Asocie un mail a su cuenta"))
+        {
+            Intent intent =
+                    new Intent(NavDrawer.this,AddMail.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

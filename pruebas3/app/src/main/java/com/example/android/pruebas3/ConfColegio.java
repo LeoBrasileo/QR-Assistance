@@ -60,7 +60,7 @@ public class ConfColegio extends AppCompatActivity
         progressDialog.setMessage("Cargando...");
         progressDialog.show();
 
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle = getIntent().getExtras();
         final String dni = bundle.getString("dni");
 
         users.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -72,6 +72,7 @@ public class ConfColegio extends AppCompatActivity
                 Intent intent =
                         new Intent(ConfColegio.this,NavDrawer.class);
                 progressDialog.dismiss();
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
 
