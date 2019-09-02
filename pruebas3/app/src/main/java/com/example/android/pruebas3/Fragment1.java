@@ -288,12 +288,6 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
             }
         });
 
-
-        //Toda la parte tecnica de la app se va a programar aca
-
-
-
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()
         {
