@@ -88,7 +88,8 @@ public class Horarios extends Fragment {
 
             final Bundle bundle = getActivity().getIntent().getExtras();
             final String div = bundle.getString("div");
-            division = todo.child(div);
+            DatabaseReference horariosrama = database.getReference("horarios");
+            division = todo.child("horarios").child(div);
 
             switch (item.getItemId()) {
                 case R.id.navigation_lunes:

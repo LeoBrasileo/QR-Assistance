@@ -242,7 +242,8 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                         {
-                            diaactual = division.child(day);
+                            DatabaseReference horariosrama = database.getReference("horarios");
+                            diaactual = horariosrama.child(div).child(day);
                             materiaact1 = diaactual.child(horariosmaterias);
 
                             materiaact1.addListenerForSingleValueEvent(new ValueEventListener()

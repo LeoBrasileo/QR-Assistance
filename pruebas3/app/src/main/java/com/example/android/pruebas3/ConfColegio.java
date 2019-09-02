@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ConfColegio extends AppCompatActivity
 {
     private FirebaseDatabase database;
+    private DatabaseReference divisiones;
     private DatabaseReference users;
     private Button validar;
     private Spinner colegios;
@@ -37,6 +38,7 @@ public class ConfColegio extends AppCompatActivity
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance();
         users = database.getReference("usuarios");
+        divisiones = database.getReference("divisiones");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,6 +71,7 @@ public class ConfColegio extends AppCompatActivity
                 ObjetoUsuario chschool = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
                 chschool.setSchool(school);
                 users.child(dni).setValue(chschool);
+                divisiones.child(school).child(dni).setValue(bundle.getString("user"));
                 Intent intent =
                         new Intent(ConfColegio.this,NavDrawer.class);
                 progressDialog.dismiss();

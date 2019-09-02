@@ -36,6 +36,7 @@ public class registro2 extends AppCompatActivity {
     private Spinner spinnerColegios;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
+    private DatabaseReference divisiones;
     private DatabaseReference users;
     private String nombre;
     private String dou;
@@ -57,6 +58,7 @@ public class registro2 extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         users = database.getReference("usuarios");
+        divisiones = database.getReference("divisiones");
         progressDialog = new ProgressDialog(this);
 
         Bundle bundle = this.getIntent().getExtras();
@@ -128,6 +130,7 @@ public class registro2 extends AppCompatActivity {
                     {
                         ObjetoUsuario usuario = new ObjetoUsuario(nombre1, password, dni, email, finalSchool);
                         users.child(String.valueOf(dni)).setValue(usuario);
+                        divisiones.child(finalSchool).child(dni).setValue(nombre1);
                         Toast.makeText(registro2.this,"Usuario correctamente registrado",Toast.LENGTH_LONG).show();
                         //estaria bueno un delay aca
                         progressDialog.dismiss();
