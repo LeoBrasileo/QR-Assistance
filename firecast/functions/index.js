@@ -11,21 +11,11 @@ admin.initializeApp();
   response.send("🍕🍕🍕🍕🍕🍕🍕🍕");
  });
 
-// [START addMessage]
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/mensaje
-// [START addMessageTrigger]
 exports.addMessageForTest1 = functions.https.onRequest(async (req, res) => {
-    // [END addMessageTrigger]
       const mensaje = "no quiero mas childs";
-      // [START adminSdkPush]
-      // Push the new message into the Realtime Database using the Firebase Admin SDK.
       const snapshot = await admin.database().ref('javascript').push(mensaje);
-      // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
       res.redirect(303, snapshot.ref.toString());
-      // [END adminSdkPush]
     });
-    // [END addMessage]
 
 exports.addMessageForTest2 = functions.https.onRequest(async (req, res) => {
       const mensaje = "ProBande3lOsbdYHBjbfe";
