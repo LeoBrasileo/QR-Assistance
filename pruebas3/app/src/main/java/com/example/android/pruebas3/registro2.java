@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,6 +107,11 @@ public class registro2 extends AppCompatActivity {
         {
             final String school1 = "";
             school = school1;
+        }
+        if (TextUtils.isEmpty(school))
+        {
+            Toast.makeText(this, "Seleccione su division", Toast.LENGTH_LONG).show();
+            return;
         }
         progressDialog.setMessage("Creando Usuario...");
         progressDialog.show();
