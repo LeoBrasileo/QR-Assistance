@@ -43,6 +43,8 @@ def buscarFecha():
 		
 	print(i)
 
+	idMateriActual = db.child("inasistencias").child("5°MA").child(time.strftime("%A")).child(i).child("id").get()
+
 #---------------------------------------------------------
 schedule.every(60).seconds.do(buscarFecha)
 
