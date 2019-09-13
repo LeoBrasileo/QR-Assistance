@@ -37,7 +37,7 @@ def buscarFecha():
 			#ACTUALIZAR HORAMIN
 			horaminString = time.strftime("%H") + time.strftime("%M")
 			int_horamin = int(horaminString)
-			print("no me baño")
+			print("Descansando")
 			time.sleep(900) #esto tiene que ser mas chico que la brecha del while
 			print("me despierto")
 		
