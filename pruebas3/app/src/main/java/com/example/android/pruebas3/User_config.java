@@ -48,6 +48,7 @@ public class User_config extends Fragment
     private OnFragmentInteractionListener mListener;
     private FirebaseDatabase database;
     private DatabaseReference users;
+    private DatabaseReference divisiones;
 
     public User_config() {
         // Required empty public constructor
@@ -81,8 +82,10 @@ public class User_config extends Fragment
 
         database = FirebaseDatabase.getInstance();
         users = database.getReference("usuarios");
+        divisiones = database.getReference("divisiones");
         final Bundle bundle = getActivity().getIntent().getExtras();
         final String dni = bundle.getString("dni");
+        final String div = bundle.getString("div");
 
         final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
         configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar email"));
@@ -189,6 +192,7 @@ public class User_config extends Fragment
                                             if (userExist.getDni().equals(dni))
                                             {
                                                 users.child(String.valueOf(dni)).removeValue();
+                                                divisiones.child(div).child(dni).removeValue();
                                                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                                 editor.putString("user", "");
