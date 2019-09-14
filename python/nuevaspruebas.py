@@ -15,6 +15,8 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database ()
 
+numerosImpares = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51]
+
 division = "5°MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
 
 def buscarFecha(): 
@@ -44,6 +46,8 @@ def buscarFecha():
 	if diaESP == "sabado" and diaESP == "domingo":
 		time.sleep(86350)
 
+	int_horamin = 759
+
 	while int_horamin > horaLimites[i]:
 		i = i + 1
 	if i >= 7:
@@ -60,6 +64,19 @@ def buscarFecha():
 	idMateriActualString = str (idMateriActual.val())
 	print("la materia actual es: " + idMateriActualString)
 
+	alumnos = db.child("divisiones").child(division).get()
+	alumnos = str (alumnos.val()) #OrderedDict([('1', 'Pruebas'), ('43626546', 'Luciano Garbarino'), ('43725334', 'Dan Farach'), ('43917960', 'Dan Szujatovich'), ('43992906', 'Gianfranco Loayza'), ('44159126', 'Leonel Braginski')])
+	alumnos = alumnos.replace("OrderedDict", "")
+	alumnos = alumnos.replace("(", "")
+	alumnos = alumnos.replace("[", "")
+	alumnos = alumnos.replace(")", "")
+	alumnos = alumnos.replace("]", "")
+	alumnos = alumnos.replace(",", "")
+	alumnos = alumnos.replace("'", "") #1 Pruebas 43626546 Luciano Garbarino 43725334 Dan Farach 43917960 Dan Szujatovich 43992906 Gianfranco Loayza 44159126 Leonel Braginski
+	alumnos = alumnos.split(" ")
+	#En este punto la variable alumnos es un vector en la que los numeros pares son dnis y los impares nombres con una separacion entre nombre y apellido por guion bajo
+	#tengo que dividirme alumnos en 2 varianles: alumnosdnis y alumnosnombres
+	print(alumnos[3])
 #---------------------------------------------------------
 schedule.every(3).seconds.do(buscarFecha)
 
