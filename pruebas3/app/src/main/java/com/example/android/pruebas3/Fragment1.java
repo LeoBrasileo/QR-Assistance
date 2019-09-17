@@ -262,6 +262,8 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
                                     inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
 
+                                    inasistenciaramadia.child("ausentes").child(bundle.getString("dni")).removeValue();
+
                                     Toast.makeText(getContext(),"Asistencia tomada en " + idActual,Toast.LENGTH_LONG).show();
                                 }
 

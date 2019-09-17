@@ -136,8 +136,8 @@ public class registro2 extends AppCompatActivity {
                     {
                         ObjetoUsuario usuario = new ObjetoUsuario(nombre1, password, dni, email, finalSchool);
                         users.child(String.valueOf(dni)).setValue(usuario);
-                        String nombreparaladb = nombre1.replace(" ", "_");
-                        divisiones.child(finalSchool).child(dni).setValue(nombreparaladb);
+                        //String nombreparaladb = nombre1.replace(" ", "_");
+                        divisiones.child(finalSchool).child(dni).setValue(nombre1);
                         Toast.makeText(registro2.this,"Usuario correctamente registrado",Toast.LENGTH_LONG).show();
                         //estaria bueno un delay aca
                         progressDialog.dismiss();
