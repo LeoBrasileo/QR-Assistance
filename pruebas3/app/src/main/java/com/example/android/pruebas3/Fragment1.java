@@ -1,11 +1,14 @@
 package com.example.android.pruebas3;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -264,7 +269,27 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                                     inasistenciaramadia.child("ausentes").child(bundle.getString("dni")).removeValue();
 
-                                    Toast.makeText(getContext(),"Asistencia tomada en " + idActual,Toast.LENGTH_LONG).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
+                                    TextView textoMateriaAlert = (TextView) view.findViewById(R.id.txtPresencia);
+                                    ImageView imageView = (ImageView) view.findViewById(R.id.imageTick);
+                                    imageView.setBackgroundResource(R.drawable.loadingtick);
+                                    final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
+                                    frameAnimation.start();
+                                    textoMateriaAlert.setText("Asistencia tomada en " + idActual);
+                                    builder.setView(view);
+                                    final AlertDialog dialog = builder.create();
+                                    dialog.show();
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            dialog.dismiss();
+                                            frameAnimation.stop();
+                                        }
+                                    }, 1410);
                                 }
 
                                 @Override
@@ -279,7 +304,27 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
 
                 }else
                 {
-                    Toast.makeText(getContext(),"Error en el escaneo, vuelva a intentar",Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
+                    TextView textoMateriaAlert = (TextView) view.findViewById(R.id.txtPresencia);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.imageTick);
+                    imageView.setBackgroundResource(R.drawable.loadingwarn);
+                    final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
+                    frameAnimation.start();
+                    textoMateriaAlert.setText("ERROR en el escaneo");
+                    builder.setView(view);
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            dialog.dismiss();
+                            frameAnimation.stop();
+                        }
+                    }, 1610);
                 }
             }
 

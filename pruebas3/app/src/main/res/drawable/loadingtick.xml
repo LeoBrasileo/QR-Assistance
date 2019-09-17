@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item android:drawable="@drawable/fragmentotick0" android:duration="50" />
+    <item android:drawable="@drawable/fragmentotick1" android:duration="50" />
+    <item android:drawable="@drawable/fragmentotick2" android:duration="50" />
+    <item android:drawable="@drawable/fragmentotick3" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick4" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick5" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick6" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick7" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick8" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick9" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick10" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick11" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick12" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick13" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick14" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick15" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick16" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick17" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick18" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick19" android:duration="70" />
+    <item android:drawable="@drawable/fragmentotick20" android:duration="70" />
+
+</animation-list>

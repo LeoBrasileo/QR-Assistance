@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item android:drawable="@drawable/fragmentowarn0" android:duration="50" />
+    <item android:drawable="@drawable/fragmentowarn1" android:duration="50" />
+    <item android:drawable="@drawable/fragmentowarn2" android:duration="50" />
+    <item android:drawable="@drawable/fragmentowarn3" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn4" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn6" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn7" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn8" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn9" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn0" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn10" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn11" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn12" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn13" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn14" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn15" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn16" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn17" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn18" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn19" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn20" android:duration="70" />
+    <item android:drawable="@drawable/fragmentowarn21" android:duration="70" />
+
+</animation-list>
