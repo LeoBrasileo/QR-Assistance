@@ -53,6 +53,8 @@ def AgregarAusentes():
 	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
 	fechaESP = time.strftime("%d") + switcher.get(time.strftime("%B"),"Entrada invalida")
 
+	#zona para harcordear
+
 	if diaESP == "sabado" or diaESP == "domingo":
 		print("Hoy no hay clases")
 		time.sleep(86350)
@@ -76,6 +78,9 @@ def AgregarAusentes():
 	for x in dictAlumnos:
 		print(x)
         #todos los dnis son esta variable x que esta solo en este for
+		faltasMateria = db.child("faltas").child(division).child(x).child(idMateriActualString).get()
+		if not faltasMateria.val():
+			db.child("faltas").child(division).child(x).child(idMateriActualString).set(0)
 		faltasMateria = int (db.child("faltas").child(division).child(x).child(idMateriActualString).get().val())
 		faltasMateria = faltasMateria + 1
 		db.child("faltas").child(division).child(x).child(idMateriActualString).set(faltasMateria)
