@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -179,6 +180,9 @@ public class User_config extends Fragment
                 if (position == 6)
                 {
                     AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
+                    View view2 = getLayoutInflater().inflate(R.layout.alert_dialog_borrarusuario, null);
+                    eliminar.setView(view2);
+                    final EditText editPw = view2.findViewById(R.id.editPSW1);
                     eliminar.setMessage("Esta accion es permanente, perdera todos sus datos.")
                             .setCancelable(false)
                             .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
@@ -189,18 +193,26 @@ public class User_config extends Fragment
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             ObjetoUsuario userExist = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
-                                            if (userExist.getDni().equals(dni))
+                                            if (editPw.getText().toString().equals(userExist.getPassword().toString()))
                                             {
-                                                users.child(String.valueOf(dni)).removeValue();
-                                                divisiones.child(div).child(dni).removeValue();
-                                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                editor.putString("user", "");
-                                                editor.putString("pass", "");
-                                                editor.commit();
-                                                Intent intent =
-                                                        new Intent(getActivity(),login.class);
-                                                startActivity(intent);
+                                                if (userExist.getDni().equals(dni))
+                                                {
+                                                    users.child(String.valueOf(dni)).removeValue();
+                                                    divisiones.child(div).child(dni).removeValue();
+                                                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putString("user", "");
+                                                    editor.putString("pass", "");
+                                                    editor.commit();
+                                                    Intent intent =
+                                                            new Intent(getActivity(),login.class);
+                                                    startActivity(intent);
+                                                }
+                                            }else
+                                            {
+                                                Toast.makeText(getContext(),"Se debe escribir la contraseña correcta",Toast.LENGTH_LONG).show();
+                                                editPw.setText("");
+                                                return;
                                             }
                                         }
 

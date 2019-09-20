@@ -285,6 +285,38 @@ public class Horarios extends Fragment {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        division = todo.child("horarios").child(div);
+        dia = division.child("lunes");
+        dia.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ObjetoHorariosMaterias mat1 = dataSnapshot.child("1").getValue(ObjetoHorariosMaterias.class);
+                ObjetoHorariosMaterias mat2 = dataSnapshot.child("2").getValue(ObjetoHorariosMaterias.class);
+                ObjetoHorariosMaterias mat3 = dataSnapshot.child("3").getValue(ObjetoHorariosMaterias.class);
+                ObjetoHorariosMaterias mat4 = dataSnapshot.child("4").getValue(ObjetoHorariosMaterias.class);
+                //ObjetoHorariosMaterias mat5 = dataSnapshot.child("5").getValue(ObjetoHorariosMaterias.class);
+                //ObjetoHorariosMaterias mat6 = dataSnapshot.child("6").getValue(ObjetoHorariosMaterias.class);
+
+                ArrayList<ObjetoHorariosMaterias> materias = new ArrayList<ObjetoHorariosMaterias>();
+                adapter = new AdapterHorarios(getActivity(),materias);
+                listView.setAdapter(adapter);
+
+                materias.clear();
+                materias.add(new ObjetoHorariosMaterias("","                 Lunes", ""));
+                materias.add(mat1);
+                materias.add(mat2);
+                materias.add(mat3);
+                materias.add(mat4);
+                //materias.add(mat5);
+                //materias.add(mat6);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         // Configurar la vista
         return v;
     }
