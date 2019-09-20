@@ -48,6 +48,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference diaactual;
     private DatabaseReference materiaact1;
     private DatabaseReference fecha;
+    private DatabaseReference faltas;
     private String horariosmaterias = "";
     private String fechachild = "";
 
@@ -145,6 +146,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
         día = database.getReference("día");
         division = database.getReference(div);
         fecha = database.getReference("fecha");
+        faltas = database.getReference("faltas").child(div);
         inasistencias = database.getReference("inasistencias").child(div);
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -268,6 +270,20 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                     inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
 
                                     inasistenciaramadia.child("ausentes").child(bundle.getString("dni")).removeValue();
+
+                                    final DatabaseReference ramaFaltasAct = faltas.child(bundle.getString("dni")).child(idActual);
+
+                                    ramaFaltasAct.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                        {
+                                            int faltastot = dataSnapshot.getValue(Integer.class);
+                                            faltastot = faltastot - 1;
+                                            ramaFaltasAct.setValue(faltastot);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                    });
 
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
