@@ -5,7 +5,7 @@ if exist "../scripts/env_for_icons.bat" (
 	::ECHO Creating Python3 Virtual Environment
 	call "../scripts/env_for_icons.bat")
 
-ECHO Empezando programa
+ECHO Starting software
 
 python TodoJunto.py 
 PAUSE

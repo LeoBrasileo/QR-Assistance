@@ -53,7 +53,11 @@ def AgregarAusentes():
 	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
 	fechaESP = time.strftime("%d") + switcher.get(time.strftime("%B"),"Entrada invalida")
 
+	#-------------------------------------------------
 	#zona para harcordear
+	int_horamin = 934
+	diaESP = "martes"
+	#-------------------------------------------------
 
 	if diaESP == "sabado" or diaESP == "domingo":
 		print("Hoy no hay clases")
@@ -74,8 +78,10 @@ def AgregarAusentes():
 	idMateriActual = db.child("horarios").child(division).child(diaESP).child(i).child("id").get()
 	if not idMateriActual.val():
 		print("En este momento no hay ninguna materia")
-		time.sleep(100)
-	idMateriActualString = str (idMateriActual.val())
+		time.sleep(14400)#4 horas
+	else:
+		idMateriActualString = str (idMateriActual.val())
+		#Si el programa no pasa por aca crashea, asi que hay que procurar utilizarlo solo en tiempo de clase
 
 	dictAlumnos = db.child("divisiones").child(division).get().val()
 	for x in dictAlumnos:
@@ -92,10 +98,8 @@ def AgregarAusentes():
 	print("Ausentes actualizados correctamente")
 
 def QRS():
-	print("Updating Firebase...")
-
 	# Genero mensaje aleatorio
-	msg =random.randrange (1,392022)
+	msg =random.randrange (1,392022009)
 	msg = str (msg)
 
 	# Subo el mensaje (string) a Firebase
@@ -105,19 +109,18 @@ def QRS():
 	# Genero el QR con el mensaje (string)
 	name = 'QR_'+msg+'.jpg'
 	qr = qrcode.make(msg)
-	print("Nombre del archivo: "+name)
-	print("Mensaje: "+msg)
+	print("string del QR actual: "+msg)
 	print("")
-	qr.save(name)
+	qr.save("QRactual.jpg")
 
-	img = cv2.imread(name)
+	img = cv2.imread("QRactual.jpg")
 	cv2.imshow('image',img)
 	k = cv2.waitKey(1)
 
 
 #---------------------------------------------------------
 AgregarAusentes()
-schedule.every(3).seconds.do(QRS) #Cada 3 segundos crea un qr y su respectivo string en la db
+schedule.every(2).seconds.do(QRS) #Cada 2 segundos crea un qr y su respectivo string en la db
 schedule.every(4850).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 90 minutos
 #---------------------------------------------------------
 
