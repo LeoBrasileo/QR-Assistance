@@ -55,8 +55,8 @@ def AgregarAusentes():
 
 	#-------------------------------------------------
 	#zona para harcordear
-	int_horamin = 934
-	diaESP = "martes"
+
+
 	#-------------------------------------------------
 
 	if diaESP == "sabado" or diaESP == "domingo":
@@ -128,26 +128,3 @@ schedule.every(4850).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada
 while True:
 	schedule.run_pending()
 	time.sleep(1)
-
-
-'''
-	alumnos = str (alumnos.val()) #OrderedDict([('1', 'Pruebas'), ('43626546', 'Luciano Garbarino'), ('43725334', 'Dan Farach'), ('43917960', 'Dan Szujatovich'), ('43992906', 'Gianfranco Loayza'), ('44159126', 'Leonel Braginski')])
-	alumnos = alumnos.replace("OrderedDict", "")
-	alumnos = alumnos.replace("(", "")
-	alumnos = alumnos.replace("[", "")
-	alumnos = alumnos.replace(")", "")
-	alumnos = alumnos.replace("]", "")
-	alumnos = alumnos.replace(",", "")
-	alumnos = alumnos.replace("'", "") #1 Pruebas 43626546 Luciano Garbarino 43725334 Dan Farach 43917960 Dan Szujatovich 43992906 Gianfranco Loayza 44159126 Leonel Braginski
-	alumnos = alumnos.split(" ")
-	#En este punto la variable alumnos es un vector en la que los numeros pares son dnis y los impares nombres con una separacion entre nombre y apellido por guion bajo
-	#tengo que dividirme alumnos en 2 variables: alumnosdnis y alumnosnombres
-	#Usar for para que busque solo entre los pares y cree otro vector solo de dnis o nombres
-	for x in range(0,20):
-		if x % 2 == 0:
-			#el numero es par
-			alumnosdnis = max(alumnos[x])
-	print(alumnos[3])
-	print(alumnosdnis[2])
-'''
-#todo esto era para la funcion de copiar y pegar rama alumnos pero ya no lo necesito pero me da pena borrarlo porque estuve trabajando mucho en esto
