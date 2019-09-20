@@ -243,7 +243,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     }
 
 
-                    //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agreg al usuario loguado a la materia que se este dando en ese horario
+                    //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agrego al usuario loguado a la materia que se este dando en ese horario
 
                     inasistencias.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
