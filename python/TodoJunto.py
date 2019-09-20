@@ -72,6 +72,9 @@ def AgregarAusentes():
 			print("Actualizando...")
 
 	idMateriActual = db.child("horarios").child(division).child(diaESP).child(i).child("id").get()
+	if not idMateriActual.val():
+		print("En este momento no hay ninguna materia")
+		time.sleep(100)
 	idMateriActualString = str (idMateriActual.val())
 
 	dictAlumnos = db.child("divisiones").child(division).get().val()
