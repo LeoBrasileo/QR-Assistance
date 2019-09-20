@@ -50,6 +50,7 @@ public class User_config extends Fragment
     private FirebaseDatabase database;
     private DatabaseReference users;
     private DatabaseReference divisiones;
+    private DatabaseReference faltas;
 
     public User_config() {
         // Required empty public constructor
@@ -84,6 +85,7 @@ public class User_config extends Fragment
         database = FirebaseDatabase.getInstance();
         users = database.getReference("usuarios");
         divisiones = database.getReference("divisiones");
+        faltas = database.getReference("faltas");
         final Bundle bundle = getActivity().getIntent().getExtras();
         final String dni = bundle.getString("dni");
         final String div = bundle.getString("div");
@@ -199,6 +201,7 @@ public class User_config extends Fragment
                                                 {
                                                     users.child(String.valueOf(dni)).removeValue();
                                                     divisiones.child(div).child(dni).removeValue();
+                                                    //faltas.child(div).child(dni).removeValue();
                                                     SharedPreferences sharedPreferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                                     editor.putString("user", "");
