@@ -91,7 +91,7 @@ public class User_config extends Fragment
         final String div = bundle.getString("div");
 
         final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
-        configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar email"));
+        configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar Email"));
         configs_strings.add((new Configs_strings(R.drawable.mailc,"Cambiar Email")));
         configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
         configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña"));
