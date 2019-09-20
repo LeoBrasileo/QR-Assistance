@@ -172,7 +172,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                     int idiames = calendar.get(Calendar.MONTH) + 1;
 
                     String horamin1 = hora1 + min1;
-                    int horamin = Integer.valueOf(horamin1);
+                    final int horamin = Integer.valueOf(horamin1);
                     final String fechar = String.valueOf(ifecha) + "/" + String.valueOf(idiames);
 
                     switch (idiames)
@@ -277,8 +277,32 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                                         {
-                                            int faltastot = dataSnapshot.getValue(Integer.class);
+                                            double faltastot = dataSnapshot.getValue(Integer.class);
                                             faltastot = faltastot - 1;
+                                            if (horamin > 755 && horamin < 905)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
+                                            else if (horamin > 930 && horamin < 1040)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
+                                            else if (horamin > 1055 && horamin < 1215)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
+                                            else if (horamin > 1320 && horamin < 1430)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
+                                            else if (horamin > 1445 && horamin < 1600)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
+                                            else if (horamin > 1615 && horamin < 1730)
+                                            {
+                                                faltastot = faltastot + 0.5;
+                                            }
                                             ramaFaltasAct.setValue(faltastot);
                                         }
                                         @Override
