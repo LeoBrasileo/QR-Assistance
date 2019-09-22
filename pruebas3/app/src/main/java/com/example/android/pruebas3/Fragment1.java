@@ -278,30 +278,30 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                                         {
                                             double faltastot = dataSnapshot.getValue(Integer.class);
-                                            faltastot = faltastot - 1;
+                                            faltastot = faltastot - 2;
                                             if (horamin > 755 && horamin < 905)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             else if (horamin > 930 && horamin < 1040)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             else if (horamin > 1055 && horamin < 1215)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             else if (horamin > 1320 && horamin < 1430)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             else if (horamin > 1445 && horamin < 1600)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             else if (horamin > 1615 && horamin < 1730)
                                             {
-                                                faltastot = faltastot + 0.5;
+                                                faltastot = faltastot + 1;
                                             }
                                             ramaFaltasAct.setValue(faltastot);
                                         }

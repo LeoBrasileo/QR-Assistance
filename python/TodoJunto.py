@@ -79,9 +79,8 @@ def AgregarAusentes():
 	if not idMateriActual.val():
 		print("En este momento no hay ninguna materia")
 		time.sleep(14400)#4 horas
-	else:
-		idMateriActualString = str (idMateriActual.val())
-		#Si el programa no pasa por aca crashea, asi que hay que procurar utilizarlo solo en tiempo de clase
+	idMateriActualString = str (idMateriActual.val())
+	#Si el programa no pasa por aca crashea, asi que hay que procurar utilizarlo solo en tiempo de clase
 
 	dictAlumnos = db.child("divisiones").child(division).get().val()
 	for x in dictAlumnos:
@@ -91,7 +90,7 @@ def AgregarAusentes():
 		if not faltasMateria.val():
 			db.child("faltas").child(division).child(x).child(idMateriActualString).set(0)
 		faltasMateria = int (db.child("faltas").child(division).child(x).child(idMateriActualString).get().val())
-		faltasMateria = faltasMateria + 1
+		faltasMateria = faltasMateria + 2
 		db.child("faltas").child(division).child(x).child(idMateriActualString).set(faltasMateria)
 
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())

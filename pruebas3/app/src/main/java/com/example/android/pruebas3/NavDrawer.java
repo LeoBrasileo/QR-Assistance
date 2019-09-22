@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
@@ -37,6 +38,7 @@ import android.view.Menu;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,13 @@ import android.widget.Toast;
 import java.security.PublicKey;
 import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static com.example.android.pruebas3.R.layout.item_inasistencias;
+import static com.example.android.pruebas3.R.layout.item_subhorarios;
 
 public class NavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Fragment1.OnFragmentInteractionListener,User_config.OnFragmentInteractionListener,Horarios.OnFragmentInteractionListener,Inasistencias.OnFragmentInteractionListener {
@@ -278,7 +287,7 @@ public class NavDrawer extends AppCompatActivity
 
         AdapterHorarios(Activity context,ArrayList<ObjetoHorariosMaterias> listHorarios)
         {
-            super(context, R.layout.item_subhorarios, listHorarios);
+            super(context, item_subhorarios, listHorarios);
             this.context = context;
             this.listHorarios = listHorarios;
         }
@@ -291,7 +300,7 @@ public class NavDrawer extends AppCompatActivity
             if(item == null)
             {
                 LayoutInflater inflater = context.getLayoutInflater();
-                item = inflater.inflate(R.layout.item_subhorarios, null);
+                item = inflater.inflate(item_subhorarios, null);
 
                 holder = new NavDrawer.AdapterHorarios.ViewHolder();
                 holder.txtNumBloque = item.findViewById(R.id.textViewBloque);
@@ -305,6 +314,53 @@ public class NavDrawer extends AppCompatActivity
             }
 
             holder.txtNombreMateria.setText(listHorarios.get(position).getId());
+            return(item);
+        }
+    }
+
+    static class AdapterInasistencias extends ArrayAdapter<ObjetoFaltas>
+    {
+
+        private Activity context;
+        private ArrayList<ObjetoFaltas> listFaltas;
+
+        static class ViewHolder
+        {
+            TextView txtNombreMateria;
+            TextView txtFaltasmateria;
+        }
+
+        AdapterInasistencias(Activity context,ArrayList<ObjetoFaltas> listFaltas)
+        {
+            super(context, R.layout.item_subhorarios, listFaltas);
+            this.context = context;
+            this.listFaltas = listFaltas;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View item = convertView;
+            NavDrawer.AdapterInasistencias.ViewHolder holder;
+
+            if(item == null)
+            {
+                LayoutInflater inflater = context.getLayoutInflater();
+                item = inflater.inflate(item_inasistencias, null);
+
+                holder = new NavDrawer.AdapterInasistencias.ViewHolder();
+                holder.txtNombreMateria = item.findViewById(R.id.txtMateria);
+                holder.txtFaltasmateria = item.findViewById(R.id.txtFaltas);
+                item.setTag(holder);
+            }
+            else
+            {
+                holder = (NavDrawer.AdapterInasistencias.ViewHolder)item.getTag();
+            }
+
+            Long faltas = listFaltas.get(position).getNumeroFaltas();
+
+            holder.txtFaltasmateria.setText(faltas.toString());
+            holder.txtNombreMateria.setText(listFaltas.get(position).getNombreMateria());
             return(item);
         }
     }
