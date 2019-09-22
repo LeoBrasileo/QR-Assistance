@@ -187,20 +187,20 @@ public class Inasistencias extends Fragment {
 
             holder.imageView.setVisibility(View.INVISIBLE);
             holder.txtFaltasmateria.setText(faltasReales.toString());
-            holder.txtNombreMateria.setText(listFaltas.get(position).getNombreMateria());
+            holder.txtNombreMateria.setText(listFaltas.get(position).getNombreMateria() + ":");
 
             if (faltas >= 0 && faltas <= 10)
             {
                 holder.txtFaltasmateria.setTextColor(Color.rgb(50,160,0));
             }else if (faltas > 10 && faltas <= 15)
             {
-                holder.txtFaltasmateria.setTextColor(Color.rgb(90,70,0));
+                holder.txtFaltasmateria.setTextColor(Color.rgb(196,135,21));
             }else if (faltas > 15 && faltas <= 20)
             {
-                holder.txtFaltasmateria.setTextColor(Color.rgb(150,40,0));
+                holder.txtFaltasmateria.setTextColor(Color.rgb(193,122,20));
             }else if (faltas > 20 && faltas <= 25)
             {
-                holder.txtFaltasmateria.setTextColor(Color.rgb(200,0,34));
+                holder.txtFaltasmateria.setTextColor(Color.rgb(214,65,28));
             }else if (faltas >= 26)
             {
                 holder.txtFaltasmateria.setTextColor(Color.rgb(255,0,0));
