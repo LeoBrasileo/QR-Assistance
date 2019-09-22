@@ -88,11 +88,13 @@ public class Inasistencias extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map <String,Long> map = (Map<String,Long>) dataSnapshot.getValue();
                 ArrayList<ObjetoFaltas> list = new ArrayList<ObjetoFaltas>();
+                //En la db el numero de faltas debe estar siempre en Long, si las faltas reales son 5 debe haber un 10 en la db
+                //el programa se debe encargar de que lo que se muestre en el ListView sea siempre la mitad del resultado de la db
                 for (int i = 0;i<map.size();i++)
                 {
                     ArrayList<String> nombresMaterias = new ArrayList<String>(map.keySet());
                     ArrayList<Long> faltasMaterias = new ArrayList<Long>(map.values());
-                    ObjetoFaltas faltas = new ObjetoFaltas((nombresMaterias.get(i).toString()),faltasMaterias.get(i));
+                    ObjetoFaltas faltas = new ObjetoFaltas((nombresMaterias.get(i)),faltasMaterias.get(i));
                     list.add(faltas);
                     AdapterInasistencias adapter = new AdapterInasistencias(getActivity(),list);
                     listView.setAdapter(adapter);
