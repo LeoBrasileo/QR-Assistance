@@ -2,6 +2,7 @@ package com.example.android.pruebas3;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -149,6 +150,7 @@ public class Inasistencias extends Fragment {
         {
             TextView txtNombreMateria;
             TextView txtFaltasmateria;
+            ImageView imageView;
         }
 
         AdapterInasistencias(Activity context,ArrayList<ObjetoFaltas> listFaltas)
@@ -171,6 +173,7 @@ public class Inasistencias extends Fragment {
                 holder = new NavDrawer.AdapterInasistencias.ViewHolder();
                 holder.txtNombreMateria = item.findViewById(R.id.txtMateria);
                 holder.txtFaltasmateria = item.findViewById(R.id.txtFaltas);
+                holder.imageView = item.findViewById(R.id.imageView2);
                 item.setTag(holder);
             }
             else
@@ -182,8 +185,28 @@ public class Inasistencias extends Fragment {
             Double faltasReales = faltas.doubleValue();
             faltasReales = faltasReales / 2;
 
+            holder.imageView.setVisibility(View.INVISIBLE);
             holder.txtFaltasmateria.setText(faltasReales.toString());
             holder.txtNombreMateria.setText(listFaltas.get(position).getNombreMateria());
+
+            if (faltas >= 0 && faltas <= 10)
+            {
+                holder.txtFaltasmateria.setTextColor(Color.rgb(50,160,0));
+            }else if (faltas > 10 && faltas <= 15)
+            {
+                holder.txtFaltasmateria.setTextColor(Color.rgb(90,70,0));
+            }else if (faltas > 15 && faltas <= 20)
+            {
+                holder.txtFaltasmateria.setTextColor(Color.rgb(150,40,0));
+            }else if (faltas > 20 && faltas <= 25)
+            {
+                holder.txtFaltasmateria.setTextColor(Color.rgb(200,0,34));
+            }else if (faltas >= 26)
+            {
+                holder.txtFaltasmateria.setTextColor(Color.rgb(255,0,0));
+                holder.imageView.setVisibility(View.VISIBLE);
+            }
+
             return(item);
         }
     }

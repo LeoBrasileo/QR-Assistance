@@ -328,6 +328,7 @@ public class NavDrawer extends AppCompatActivity
         {
             TextView txtNombreMateria;
             TextView txtFaltasmateria;
+            ImageView imageView;
         }
 
         AdapterInasistencias(Activity context,ArrayList<ObjetoFaltas> listFaltas)
@@ -350,6 +351,7 @@ public class NavDrawer extends AppCompatActivity
                 holder = new NavDrawer.AdapterInasistencias.ViewHolder();
                 holder.txtNombreMateria = item.findViewById(R.id.txtMateria);
                 holder.txtFaltasmateria = item.findViewById(R.id.txtFaltas);
+                holder.imageView = item.findViewById(R.id.imageView2);
                 item.setTag(holder);
             }
             else
