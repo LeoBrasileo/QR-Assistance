@@ -49,6 +49,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
     private DatabaseReference materiaact1;
     private DatabaseReference fecha;
     private DatabaseReference faltas;
+    private DatabaseReference revisionEscaneo;
     private String horariosmaterias = "";
     private String fechachild = "";
 
@@ -147,6 +148,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
         division = database.getReference(div);
         fecha = database.getReference("fecha");
         faltas = database.getReference("faltas").child(div);
+        revisionEscaneo = database.getReference("escaneado").child(bundle.getString("dni"));
         inasistencias = database.getReference("inasistencias").child(div);
         qrs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -242,100 +244,133 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                         horariosmaterias = "prueba";
                     }
 
-
-                    //descargo los datos de div (5MA) y despues descargo el child del día actual, y segun el horario agrego al usuario loguado a la materia que se este dando en ese horario
-
-                    inasistencias.addListenerForSingleValueEvent(new ValueEventListener() {
+                    revisionEscaneo.addListenerForSingleValueEvent (new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                         {
-                            DatabaseReference horariosrama = database.getReference("horarios");
-                            diaactual = horariosrama.child(div).child(day);
-                            materiaact1 = diaactual.child(horariosmaterias);
-
-                            materiaact1.addListenerForSingleValueEvent(new ValueEventListener()
+                            Integer numeritoReviso = dataSnapshot.getValue(Integer.class);
+                            if (numeritoReviso == 0)
                             {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                                {
-                                    ObjetoHorariosMaterias materiarrealactual = dataSnapshot.getValue(ObjetoHorariosMaterias.class);
-                                    String idActual = materiarrealactual.getId();
-                                    String horarioActual = materiarrealactual.getHorario();
-                                    String numeroActual = materiarrealactual.getNumero();
-
-                                    DatabaseReference inasistenciaramamateria = inasistencias.child(idActual);
-                                    DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
-
-                                    ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
-                                    inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
-
-                                    inasistenciaramadia.child("ausentes").child(bundle.getString("dni")).removeValue();
-
-                                    final DatabaseReference ramaFaltasAct = faltas.child(bundle.getString("dni")).child(idActual);
-
-                                    ramaFaltasAct.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                                        {
-                                            double faltastot = dataSnapshot.getValue(Integer.class);
-                                            faltastot = faltastot - 2;
-                                            if (horamin > 755 && horamin < 905)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            else if (horamin > 930 && horamin < 1040)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            else if (horamin > 1055 && horamin < 1215)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            else if (horamin > 1320 && horamin < 1430)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            else if (horamin > 1445 && horamin < 1600)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            else if (horamin > 1615 && horamin < 1730)
-                                            {
-                                                faltastot = faltastot + 1;
-                                            }
-                                            ramaFaltasAct.setValue(faltastot);
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
-                                    });
-
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                    View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
-                                    TextView textoMateriaAlert = (TextView) view.findViewById(R.id.txtPresencia);
-                                    ImageView imageView = (ImageView) view.findViewById(R.id.imageTick);
-                                    imageView.setBackgroundResource(R.drawable.loadingtick);
-                                    final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
-                                    frameAnimation.start();
-                                    textoMateriaAlert.setText("Asistencia tomada en " + idActual);
-                                    builder.setView(view);
-                                    final AlertDialog dialog = builder.create();
-                                    dialog.show();
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable()
+                                inasistencias.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                                     {
-                                        @Override
-                                        public void run()
+                                        DatabaseReference horariosrama = database.getReference("horarios");
+                                        diaactual = horariosrama.child(div).child(day);
+                                        materiaact1 = diaactual.child(horariosmaterias);
+            
+                                        materiaact1.addListenerForSingleValueEvent(new ValueEventListener()
                                         {
-                                            dialog.dismiss();
-                                            frameAnimation.stop();
-                                        }
-                                    }, 1410);
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) { }
-                            });
-
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                            {
+                                                ObjetoHorariosMaterias materiarrealactual = dataSnapshot.getValue(ObjetoHorariosMaterias.class);
+                                                String idActual = materiarrealactual.getId();
+                                                String horarioActual = materiarrealactual.getHorario();
+                                                String numeroActual = materiarrealactual.getNumero();
+            
+                                                DatabaseReference inasistenciaramamateria = inasistencias.child(idActual);
+                                                DatabaseReference inasistenciaramadia = inasistenciaramamateria.child(fechachild);
+            
+                                                ObjetoPresensia presente = new ObjetoPresensia(bundle.getString("user"),horatotal,bundle.getString("dni"));
+                                                inasistenciaramadia.child("presentes").child(bundle.getString("dni")).setValue(presente);
+            
+                                                inasistenciaramadia.child("ausentes").child(bundle.getString("dni")).removeValue();
+            
+                                                final DatabaseReference ramaFaltasAct = faltas.child(bundle.getString("dni")).child(idActual);
+            
+                                                ramaFaltasAct.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                                    {
+                                                        double faltastot = dataSnapshot.getValue(Integer.class);
+                                                        faltastot = faltastot - 2;
+                                                        if (horamin > 755 && horamin < 905)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        else if (horamin > 930 && horamin < 1040)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        else if (horamin > 1055 && horamin < 1215)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        else if (horamin > 1320 && horamin < 1430)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        else if (horamin > 1445 && horamin < 1600)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        else if (horamin > 1615 && horamin < 1730)
+                                                        {
+                                                            faltastot = faltastot + 1;
+                                                        }
+                                                        ramaFaltasAct.setValue(faltastot);
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                                });
+            
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
+                                                TextView textoMateriaAlert = (TextView) view.findViewById(R.id.txtPresencia);
+                                                ImageView imageView = (ImageView) view.findViewById(R.id.imageTick);
+                                                imageView.setBackgroundResource(R.drawable.loadingtick);
+                                                final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
+                                                frameAnimation.start();
+                                                textoMateriaAlert.setText("Asistencia tomada en " + idActual);
+                                                revisionEscaneo.setValue(1);
+                                                builder.setView(view);
+                                                final AlertDialog dialog = builder.create();
+                                                dialog.show();
+                                                Handler handler = new Handler();
+                                                handler.postDelayed(new Runnable()
+                                                {
+                                                    @Override
+                                                    public void run()
+                                                    {
+                                                        dialog.dismiss();
+                                                        frameAnimation.stop();
+                                                    }
+                                                }, 1410);
+                                            }
+            
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                        });
+            
+                                    }
+            
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                });
+                            }else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                View view = getLayoutInflater().inflate(R.layout.alert_dialog_presencia, null);
+                                TextView textoMateriaAlert = (TextView) view.findViewById(R.id.txtPresencia);
+                                ImageView imageView = (ImageView) view.findViewById(R.id.imageTick);
+                                imageView.setBackgroundResource(R.drawable.loadingwarn);
+                                final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
+                                frameAnimation.start();
+                                textoMateriaAlert.setText("Ya se tomo asistencia en esta materia");
+                                builder.setView(view);
+                                final AlertDialog dialog = builder.create();
+                                dialog.show();
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable()
+                                {
+                                    @Override
+                                    public void run()
+                                    {
+                                        dialog.dismiss();
+                                        frameAnimation.stop();
+                                    }
+                                }, 1610);
+                            }
                         }
 
                         @Override
