@@ -92,6 +92,7 @@ def AgregarAusentes():
 		faltasMateria = int (db.child("faltas").child(division).child(x).child(idMateriActualString).get().val())
 		faltasMateria = faltasMateria + 2
 		db.child("faltas").child(division).child(x).child(idMateriActualString).set(faltasMateria)
+		db.child("escaneado").child(x).set(0)
 
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())
 	print("Ausentes actualizados correctamente")
@@ -119,7 +120,7 @@ def QRS():
 
 #---------------------------------------------------------
 AgregarAusentes()
-schedule.every(2).seconds.do(QRS) #Cada 2 segundos crea un qr y su respectivo string en la db
+schedule.every(3).seconds.do(QRS) #Cada 2 segundos crea un qr y su respectivo string en la db
 schedule.every(4850).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 90 minutos
 #---------------------------------------------------------
 
