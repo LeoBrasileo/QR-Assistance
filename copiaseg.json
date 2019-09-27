@@ -1,6 +1,6 @@
 {
   "divisiones" : {
-    "5°MA" : {
+    "5MA" : {
       "43448188" : "Luciana_Skakovsky",
       "43448452" : "Andrés_Guinsburg",
       "43626546" : "Luciano_Garbarino",
@@ -30,7 +30,7 @@
     "44159126" : 0
   },
   "faltas" : {
-    "5°MA" : {
+    "5MA" : {
       "43448452" : {
         "Digitales" : 0,
         "PP" : 0
@@ -83,7 +83,7 @@
   "fecha" : "26/9",
   "hora" : "10:17:01",
   "horarios" : {
-    "5°MA" : {
+    "5MA" : {
       "jueves" : [ null, {
         "horario" : "7.45 / 9.05",
         "id" : "PP",
@@ -192,7 +192,7 @@
     }
   },
   "inasistencias" : {
-    "5°MA" : {
+    "5MA" : {
       "Analógica" : {
         "17sep" : {
           "ausentes" : {
@@ -402,105 +402,105 @@
       "email" : "",
       "nombre" : "Luciana Skakovsky",
       "password" : "luli01",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43448452" : {
       "dni" : "43448452",
       "email" : "",
       "nombre" : "Andrés Guinsburg",
       "password" : "andicapo",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43626546" : {
       "dni" : "43626546",
       "email" : "lucigar01@gmail.com",
       "nombre" : "Luciano Garbino",
       "password" : "lucho01",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43630178" : {
       "dni" : "43630178",
       "email" : "federicocus2015@gmail.com",
       "nombre" : "Federico Custeau",
       "password" : "fedecus19",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43697812" : {
       "dni" : "43697812",
       "email" : "mateo.enero30@gmail.com",
       "nombre" : "Mateo Stefanides",
       "password" : "mateo123",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43725334" : {
       "dni" : "43725334",
       "email" : "danfarach18@gmail.com",
       "nombre" : "Dan Farach",
       "password" : "5",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43819134" : {
       "dni" : "43819134",
       "email" : "",
       "nombre" : "Kevin Liao",
       "password" : "chino",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43819469" : {
       "dni" : "43819469",
       "email" : "tomijais@gmail.com",
       "nombre" : "Tomas Jais",
       "password" : "hola123",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43874249" : {
       "dni" : "43874249",
       "email" : "",
       "nombre" : "Federico Galante",
       "password" : "FedeXX",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43901510" : {
       "dni" : "43901510",
       "email" : "dinamitaestray@gmail.com",
       "nombre" : "Maximo Estray",
       "password" : "LEO123",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43917960" : {
       "dni" : "43917960",
       "email" : "",
       "nombre" : "Dan Szujatovich",
       "password" : "18",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43987841" : {
       "dni" : "43987841",
       "email" : "",
       "nombre" : "Milena Kuzminski Sabato",
       "password" : "holaleo",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "43992906" : {
       "dni" : "43992906",
       "email" : "gianfrancozapata944@gmail.com",
       "nombre" : "Gianfranco Loayza",
       "password" : "perro123",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "44159009" : {
       "dni" : "44159009",
       "email" : "marcos.sk8.parengo@gmail.com",
       "nombre" : "Marcos Parengo",
       "password" : "marcosmarcos",
-      "school" : "5°MA"
+      "school" : "5MA"
     },
     "44159126" : {
       "dni" : "44159126",
       "email" : "leobraginski@gmail.com",
       "nombre" : "Leonel Braginski",
       "password" : "oliver",
-      "school" : "5°MA"
+      "school" : "5MA"
     }
   }
 }

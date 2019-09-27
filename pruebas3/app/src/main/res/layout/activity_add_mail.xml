@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo2"
     tools:context=".AddMail">
 
     <android.support.v7.widget.Toolbar
@@ -55,15 +54,16 @@
 
     <Button
         android:id="@+id/btnAddEmail"
+        style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:text="Validar"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/addMail1" />
+
 
 </android.support.constraint.ConstraintLayout>

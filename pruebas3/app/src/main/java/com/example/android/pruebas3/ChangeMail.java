@@ -4,11 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +33,7 @@ public class ChangeMail extends AppCompatActivity
         setContentView(R.layout.activity_change_mail);
         toolbar = findViewById(R.id.toolbar2);
         mail = findViewById(R.id.ChMail1);
-        validar = findViewById(R.id.btnChEmail);
+        validar = findViewById(R.id.btnAddEmail);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
