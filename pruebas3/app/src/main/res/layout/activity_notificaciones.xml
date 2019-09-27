@@ -19,15 +19,33 @@
 
     <Switch
         android:id="@+id/switchButton"
-        android:layout_width="295dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="355dp"
+        android:layout_height="31dp"
         android:checked="true"
         android:switchMinWidth="56dp"
         android:text="Notificaciones:"
         android:textOff="OFF"
         android:textOn="ON"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="317dp"
+        android:layout_height="515dp"
+        android:text="Las notificaciones al momento no estan implementadas en ninguna funcion de la app. Para mas adelante se espera programar un sistema de notificaciones que le avise al usuario si le quedan pocas faltas en una materia o que avise cuando se active la posibilidad de leer el codigo QR"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/switchButton" />
 </android.support.constraint.ConstraintLayout>

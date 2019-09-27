@@ -117,6 +117,7 @@ public class registro2 extends AppCompatActivity {
         progressDialog.show();
         if (password.equals(repPass))
         {
+            school = school.replace("°","");
             final String finalSchool = school;
             users.addListenerForSingleValueEvent(new ValueEventListener()
             {

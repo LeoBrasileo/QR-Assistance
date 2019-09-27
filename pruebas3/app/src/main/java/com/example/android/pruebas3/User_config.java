@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -91,13 +92,13 @@ public class User_config extends Fragment
         final String div = bundle.getString("div");
 
         final ArrayList<Configs_strings> configs_strings = new ArrayList<Configs_strings>();
-        configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar Email"));
-        configs_strings.add((new Configs_strings(R.drawable.mailc,"Cambiar Email")));
-        configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
-        configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña"));
-        configs_strings.add(new Configs_strings(R.drawable.school,"Division"));
-        configs_strings.add(new Configs_strings(R.drawable.notificacion,"Notificaciones"));
-        configs_strings.add(new Configs_strings(R.drawable.tachoide, "Eliminar usuario"));
+        configs_strings.add(new Configs_strings(R.drawable.addmail,"Registrar Email",Color.TRANSPARENT));
+        configs_strings.add((new Configs_strings(R.drawable.mailc,"Cambiar Email",Color.GRAY)));
+        //configs_strings.add(new Configs_strings(R.drawable.userpic,"Foto de perfil (tal vez algun día lo programe)"));
+        configs_strings.add(new Configs_strings(R.drawable.llave,"Cambiar contraseña",Color.TRANSPARENT));
+        configs_strings.add(new Configs_strings(R.drawable.school,"Division",Color.GRAY));
+        configs_strings.add(new Configs_strings(R.drawable.notificacion,"Notificaciones",Color.TRANSPARENT));
+        configs_strings.add(new Configs_strings(R.drawable.tachoide, "Eliminar usuario",Color.GRAY));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -153,7 +154,7 @@ public class User_config extends Fragment
                     });
                 }
 
-                if (position == 3)
+                if (position == 2)
                 {
                     Intent intent =
                             new Intent(getActivity(),Change_pass.class);
@@ -163,7 +164,7 @@ public class User_config extends Fragment
                     startActivity(intent);
                 }
 
-                if (position == 4)
+                if (position == 3)
                 {
                     Intent intent =
                             new Intent(getActivity(),ConfColegio.class);
@@ -172,14 +173,14 @@ public class User_config extends Fragment
                     startActivity(intent);
                 }
 
-                if (position == 5)
+                if (position == 4)
                 {
                     Intent intent =
                             new Intent(getActivity(),ConfNotificaciones.class);
                     startActivity(intent);
                 }
 
-                if (position == 6)
+                if (position == 5)
                 {
                     AlertDialog.Builder eliminar = new AlertDialog.Builder(getContext());
                     View view2 = getLayoutInflater().inflate(R.layout.alert_dialog_borrarusuario, null);
@@ -311,6 +312,8 @@ public class User_config extends Fragment
             {
                 holder = (NavDrawer.AdapterConfigs.ViewHolder)item.getTag();
             }
+
+            item.setBackgroundColor(listConfigs.get(position).getColor());
 
             holder.txtConfig.setText(listConfigs.get(position).getConfiguracion());
             holder.imageView.setImageResource((listConfigs.get(position).getImagen()));

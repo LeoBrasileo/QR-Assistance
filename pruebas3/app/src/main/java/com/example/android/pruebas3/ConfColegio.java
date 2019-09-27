@@ -69,7 +69,8 @@ public class ConfColegio extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ObjetoUsuario chschool = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
-                chschool.setSchool(school);
+                String school1 = school.replace("°","");
+                chschool.setSchool(school1);
                 users.child(dni).setValue(chschool);
                 divisiones.child(school).child(dni).setValue(bundle.getString("user"));
                 Intent intent =
