@@ -293,19 +293,19 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                                         {
                                                             faltastot = faltastot + 1;
                                                         }
-                                                        else if (horamin > 1055 && horamin < 1215)
+                                                        else if (horamin > 1110 && horamin < 1215)
                                                         {
                                                             faltastot = faltastot + 1;
                                                         }
-                                                        else if (horamin > 1320 && horamin < 1430)
+                                                        else if (horamin > 1325 && horamin < 1430)
                                                         {
                                                             faltastot = faltastot + 1;
                                                         }
-                                                        else if (horamin > 1445 && horamin < 1600)
+                                                        else if (horamin > 1455 && horamin < 1600)
                                                         {
                                                             faltastot = faltastot + 1;
                                                         }
-                                                        else if (horamin > 1615 && horamin < 1730)
+                                                        else if (horamin > 1625 && horamin < 1730)
                                                         {
                                                             faltastot = faltastot + 1;
                                                         }
