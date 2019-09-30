@@ -26,7 +26,7 @@ def AgregarAusentes():
 
 	horaminString = time.strftime("%H") + time.strftime("%M")
 	int_horamin = int(horaminString)
-	horaLimites = [745, 905, 1040, 1310, 1430, 1600, 1730, 2400] 
+	horaLimites = [744, 905, 1040, 1309, 1430, 1600, 1730, 2400] 
 	i = 0 #i es el apuntador de timbres, es el numero que usa la db para estructurar las materias
 
 	switcher = {
@@ -119,9 +119,14 @@ def QRS():
 
 
 #---------------------------------------------------------
-AgregarAusentes()
-schedule.every(3).seconds.do(QRS) #Cada 2 segundos crea un qr y su respectivo string en la db
-schedule.every(4850).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 90 minutos
+schedule.every().day.at("07:45").do(AgregarAusentes)
+schedule.every().day.at("09:15").do(AgregarAusentes)
+schedule.every().day.at("10:55").do(AgregarAusentes)
+schedule.every().day.at("13:10").do(AgregarAusentes)
+schedule.every().day.at("14:40").do(AgregarAusentes)
+schedule.every().day.at("16:10").do(AgregarAusentes)
+#schedule.every(4830).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 80 minutos
+schedule.every(10).seconds.do(QRS) #Cada 10 segundos crea un qr y su respectivo string en la db
 #---------------------------------------------------------
 
 # Loop
