@@ -18,7 +18,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database ()
 
-division = "5°MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
+division = "5MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
 
 def AgregarAusentes():
 
