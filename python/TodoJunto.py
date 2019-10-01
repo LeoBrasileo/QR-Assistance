@@ -72,8 +72,8 @@ def AgregarAusentes():
 			horaminString = time.strftime("%H") + time.strftime("%M")
 			int_horamin = int(horaminString)
 			print("En este momento no hay clases")
-			time.sleep(2000) #esto tiene que ser mas chico que la brecha del while
-			print("Actualizando...")
+			#time.sleep(2000) #esto tiene que ser mas chico que la brecha del while
+			return
 
 	idMateriActual = db.child("horarios").child(division).child(diaESP).child(i).child("id").get()
 	if not idMateriActual.val():
