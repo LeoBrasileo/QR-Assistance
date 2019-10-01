@@ -56,12 +56,12 @@ def AgregarAusentes():
 	#-------------------------------------------------
 	#zona para harcordear
 
-
+	
 	#-------------------------------------------------
 
-	if diaESP == "sabado" or diaESP == "domingo":
+	while diaESP == "sabado" or diaESP == "domingo":
 		print("Hoy no hay clases")
-		time.sleep(86350)
+		return
 
 	while int_horamin > horaLimites[i]:
 		i = i + 1
@@ -78,7 +78,7 @@ def AgregarAusentes():
 	idMateriActual = db.child("horarios").child(division).child(diaESP).child(i).child("id").get()
 	if not idMateriActual.val():
 		print("En este momento no hay ninguna materia")
-		time.sleep(14400)#4 horas
+		return
 	idMateriActualString = str (idMateriActual.val())
 	#Si el programa no pasa por aca crashea, asi que hay que procurar utilizarlo solo en tiempo de clase
 
