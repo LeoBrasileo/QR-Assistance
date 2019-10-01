@@ -51,7 +51,9 @@ def AgregarAusentes():
 		"August": "ago"
 		}
 	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
-	fechaESP = time.strftime("%d") + switcher.get(time.strftime("%B"),"Entrada invalida")
+	numeroDia = int (time.strftime("%d"))
+	StringNumeroDia = str(numeroDia)
+	fechaESP = StringNumeroDia + switcher.get(time.strftime("%B"),"Entrada invalida")
 
 	#-------------------------------------------------
 	#zona para harcordear
