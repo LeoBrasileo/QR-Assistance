@@ -21,9 +21,6 @@ db = firebase.database ()
 division = "5MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
 
 def AgregarAusentes():
-
-	alumnos = db.child("divisiones").child(division).get()
-
 	horaminString = time.strftime("%H") + time.strftime("%M")
 	int_horamin = int(horaminString)
 	horaLimites = [744, 905, 1040, 1309, 1430, 1600, 1730, 2400] 
@@ -50,6 +47,7 @@ def AgregarAusentes():
 		"December": "dec",
 		"August": "ago"
 		}
+
 	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
 	numeroDia = int (time.strftime("%d"))
 	StringNumeroDia = str(numeroDia)
@@ -63,6 +61,7 @@ def AgregarAusentes():
 
 	while diaESP == "sabado" or diaESP == "domingo":
 		print("Hoy no hay clases")
+		time.sleep(85800) #23 horas 50 minutos
 		return
 
 	while int_horamin > horaLimites[i]:
@@ -82,8 +81,8 @@ def AgregarAusentes():
 		print("En este momento no hay ninguna materia")
 		return
 	idMateriActualString = str (idMateriActual.val())
-	#Si el programa no pasa por aca crashea, asi que hay que procurar utilizarlo solo en tiempo de clase
 
+	alumnos = db.child("divisiones").child(division).get()
 	dictAlumnos = db.child("divisiones").child(division).get().val()
 	for x in dictAlumnos:
 		print(x)
@@ -119,6 +118,9 @@ def QRS():
 	cv2.imshow('image',img)
 	k = cv2.waitKey(1)
 
+def SleepFinde():
+	print("Estamos en Fin de semana")
+	time.sleep(86340)
 
 #---------------------------------------------------------
 schedule.every().day.at("07:45").do(AgregarAusentes)
@@ -127,7 +129,8 @@ schedule.every().day.at("10:55").do(AgregarAusentes)
 schedule.every().day.at("13:10").do(AgregarAusentes)
 schedule.every().day.at("14:40").do(AgregarAusentes)
 schedule.every().day.at("16:10").do(AgregarAusentes)
-#schedule.every(4830).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 80 minutos
+schedule.every().saturday.at("00:01").do(SleepFinde)
+schedule.every().sunday.at("00:01").do(SleepFinde)
 schedule.every(10).seconds.do(QRS) #Cada 10 segundos crea un qr y su respectivo string en la db
 #---------------------------------------------------------
 
