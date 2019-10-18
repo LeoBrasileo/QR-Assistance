@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QR Assistance</string>
+    <string name="app_name">QR Attendance</string>
 
 
     <string-array name="School">
