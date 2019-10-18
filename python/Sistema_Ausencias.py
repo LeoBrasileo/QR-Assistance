@@ -15,15 +15,12 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database ()
 
-division = "5°MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
+division = "5MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
 
 def AgregarAusentes():
-
-	alumnos = db.child("divisiones").child(division).get()
-
 	horaminString = time.strftime("%H") + time.strftime("%M")
 	int_horamin = int(horaminString)
-	horaLimites = [745, 905, 1040, 1310, 1430, 1600, 1730, 2400] 
+	horaLimites = [744, 905, 1040, 1309, 1430, 1600, 1730, 2400] 
 	i = 0 #i es el apuntador de timbres, es el numero que usa la db para estructurar las materias
 
 	switcher = {
@@ -47,12 +44,22 @@ def AgregarAusentes():
 		"December": "dec",
 		"August": "ago"
 		}
-	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
-	fechaESP = time.strftime("%d") + switcher.get(time.strftime("%B"),"Entrada invalida")
 
-	if diaESP == "sabado" and diaESP == "domingo":
+	diaESP = switcher.get(time.strftime("%A"),"Argumento invalido")
+	numeroDia = int (time.strftime("%d"))
+	StringNumeroDia = str(numeroDia)
+	fechaESP = StringNumeroDia + switcher.get(time.strftime("%B"),"Entrada invalida")
+
+	#-------------------------------------------------
+	#zona para harcordear
+
+	
+	#-------------------------------------------------
+
+	while diaESP == "sabado" or diaESP == "domingo":
 		print("Hoy no hay clases")
-		time.sleep(86350)
+		time.sleep(85800) #23 horas 50 minutos
+		return
 
 	while int_horamin > horaLimites[i]:
 		i = i + 1
@@ -63,11 +70,27 @@ def AgregarAusentes():
 			horaminString = time.strftime("%H") + time.strftime("%M")
 			int_horamin = int(horaminString)
 			print("En este momento no hay clases")
-			time.sleep(2000) #esto tiene que ser mas chico que la brecha del while
-			print("Actualizando...")
+			#time.sleep(2000) #esto tiene que ser mas chico que la brecha del while
+			return
 
 	idMateriActual = db.child("horarios").child(division).child(diaESP).child(i).child("id").get()
+	if not idMateriActual.val():
+		print("En este momento no hay ninguna materia")
+		return
 	idMateriActualString = str (idMateriActual.val())
+
+	alumnos = db.child("divisiones").child(division).get()
+	dictAlumnos = db.child("divisiones").child(division).get().val()
+	for x in dictAlumnos:
+		print(x)
+        #todos los dnis son esta variable x que esta solo en este for
+		faltasMateria = db.child("faltas").child(division).child(x).child(idMateriActualString).get()
+		if not faltasMateria.val():
+			db.child("faltas").child(division).child(x).child(idMateriActualString).set(0)
+		faltasMateria = int (db.child("faltas").child(division).child(x).child(idMateriActualString).get().val())
+		faltasMateria = faltasMateria + 2
+		db.child("faltas").child(division).child(x).child(idMateriActualString).set(faltasMateria)
+		db.child("escaneado").child(x).set(0)
 
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())
 	print("Ausentes actualizados correctamente")
@@ -75,7 +98,6 @@ def AgregarAusentes():
 
 #---------------------------------------------------------
 AgregarAusentes()
-schedule.every(5400).seconds.do(AgregarAusentes) #agrega la rama ausentes a cada materia cada 90 minutos
 #---------------------------------------------------------
 
 # Loop

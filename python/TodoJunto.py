@@ -2,6 +2,7 @@ import time
 import schedule
 import pyrebase
 import random
+import string
 import qrcode
 import numpy as np
 import cv2
@@ -98,10 +99,15 @@ def AgregarAusentes():
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())
 	print("Ausentes actualizados correctamente")
 
+def randomString(stringLength=15):
+    letters = string.ascii_letters
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
 def QRS():
 	# Genero mensaje aleatorio
 	msg =random.randrange (1,392022009)
 	msg = str (msg)
+	msg = randomString()
 
 	# Subo el mensaje (string) a Firebase
 	data = {"numeros": msg}
@@ -110,8 +116,6 @@ def QRS():
 	# Genero el QR con el mensaje (string)
 	name = 'QR_'+msg+'.jpg'
 	qr = qrcode.make(msg)
-	print("string del QR actual: "+msg)
-	print("")
 	qr.save("QRactual.jpg")
 
 	img = cv2.imread("QRactual.jpg")
