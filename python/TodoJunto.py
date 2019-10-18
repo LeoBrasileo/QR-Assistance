@@ -106,7 +106,7 @@ def randomString(stringLength=15):
 def QRS():
 	msg = randomString()
 
-	W = 200. #Define el tamaño de la imagen
+	W = 280. #Define el tamaño de la imagen
 
 	# Subo el mensaje (string) a Firebase
 	data = {"numeros": msg}
@@ -122,7 +122,9 @@ def QRS():
 	imgScale = W/width
 	newX,newY = img.shape[1]*imgScale, img.shape[0]*imgScale
 	newimg = cv2.resize(img,(int(newX),int(newY)))
-	cv2.imshow('image',newimg)
+	cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
+	cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+	cv2.imshow("window",newimg)
 	k = cv2.waitKey(1)
 
 def SleepFinde():
