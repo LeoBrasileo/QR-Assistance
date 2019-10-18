@@ -104,10 +104,9 @@ def randomString(stringLength=15):
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 def QRS():
-	# Genero mensaje aleatorio
-	msg =random.randrange (1,392022009)
-	msg = str (msg)
 	msg = randomString()
+
+	W = 200. #Define el tamaño de la imagen
 
 	# Subo el mensaje (string) a Firebase
 	data = {"numeros": msg}
@@ -119,7 +118,11 @@ def QRS():
 	qr.save("QRactual.jpg")
 
 	img = cv2.imread("QRactual.jpg")
-	cv2.imshow('image',img)
+	height, width, depth = img.shape
+	imgScale = W/width
+	newX,newY = img.shape[1]*imgScale, img.shape[0]*imgScale
+	newimg = cv2.resize(img,(int(newX),int(newY)))
+	cv2.imshow('image',newimg)
 	k = cv2.waitKey(1)
 
 def SleepFinde():
