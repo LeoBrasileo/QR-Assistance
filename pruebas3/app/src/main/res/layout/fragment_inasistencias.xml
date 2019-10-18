@@ -13,7 +13,7 @@
         <ListView
             android:id="@+id/listInasistencias"
             android:layout_width="412dp"
-            android:layout_height="691dp"
+            android:layout_height="580dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
