@@ -125,7 +125,7 @@ public class NavDrawer extends AppCompatActivity
         if (!drawer.isDrawerOpen(GravityCompat.START))
         {
             AlertDialog.Builder salir = new AlertDialog.Builder(NavDrawer.this);
-            salir.setMessage("¿Desea salir de QR Assistance?")
+            salir.setMessage("¿Desea salir de QR Attendance?")
                     .setCancelable(false)
                     .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                         @Override
