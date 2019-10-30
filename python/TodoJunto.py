@@ -4,6 +4,7 @@ import pyrebase
 import random
 import string
 import qrcode
+import sys
 import numpy as np
 import cv2
 
@@ -17,7 +18,7 @@ config = {
 "appId": "1:1017064696866:web:aefbbb731d7d8b40b4ae7b"
 }
 firebase = pyrebase.initialize_app(config)
-db = firebase.database ()
+db = firebase.database()
 
 division = "5MA" #esto deberia cambiar cada un tiempo pero en nuestro caso solo vamos a trabajar con una division
 
@@ -98,6 +99,7 @@ def AgregarAusentes():
 
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())
 	print("Ausentes actualizados correctamente")
+	return
 
 def randomString(stringLength=15):
     letters = string.ascii_letters
@@ -126,10 +128,12 @@ def QRS():
 	cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 	cv2.imshow("window",newimg)
 	k = cv2.waitKey(1)
+	return
 
 def SleepFinde():
 	print("Estamos en Fin de semana")
 	time.sleep(86340)
+	return
 
 #---------------------------------------------------------
 schedule.every().day.at("07:45").do(AgregarAusentes)
@@ -140,7 +144,7 @@ schedule.every().day.at("14:40").do(AgregarAusentes)
 schedule.every().day.at("16:10").do(AgregarAusentes)
 schedule.every().saturday.at("00:01").do(SleepFinde)
 schedule.every().sunday.at("00:01").do(SleepFinde)
-schedule.every(10).seconds.do(QRS) #Cada 10 segundos crea un qr y su respectivo string en la db
+schedule.every(4).seconds.do(QRS) #Cada 4 segundos crea un qr y su respectivo string en la db
 #---------------------------------------------------------
 
 # Loop
