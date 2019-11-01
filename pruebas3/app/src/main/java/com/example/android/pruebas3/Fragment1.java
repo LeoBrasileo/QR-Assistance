@@ -248,8 +248,8 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                         {
-                            Integer numeritoReviso = dataSnapshot.getValue(Integer.class);
-                            if (numeritoReviso == 0)
+                            Boolean numeritoReviso = dataSnapshot.getValue(Boolean.class);
+                            if (numeritoReviso == false)
                             {
                                 inasistencias.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -323,7 +323,7 @@ public class Fragment1 extends Fragment implements ZXingScannerView.ResultHandle
                                                 final AnimationDrawable frameAnimation = (AnimationDrawable) imageView.getBackground();
                                                 frameAnimation.start();
                                                 textoMateriaAlert.setText("Asistencia tomada en " + idActual);
-                                                revisionEscaneo.setValue(1);
+                                                revisionEscaneo.setValue(true);
                                                 builder.setView(view);
                                                 final AlertDialog dialog = builder.create();
                                                 dialog.show();
