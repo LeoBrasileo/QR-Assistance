@@ -95,7 +95,7 @@ def AgregarAusentes():
 		faltasMateria = int (db.child("faltas").child(division).child(x).child(idMateriActualString).get().val())
 		faltasMateria = faltasMateria + 2
 		db.child("faltas").child(division).child(x).child(idMateriActualString).set(faltasMateria)
-		db.child("escaneado").child(x).set(0)
+		db.child("escaneado").child(x).set(False)
 
 	db.child("inasistencias").child(division).child(idMateriActualString).child(fechaESP).child("ausentes").set(alumnos.val())
 	print("Ausentes actualizados correctamente")
