@@ -35,6 +35,9 @@ public class ChangeMail extends AppCompatActivity
         mail = findViewById(R.id.ChMail1);
         validar = findViewById(R.id.btnAddEmail);
 
+        database = FirebaseDatabase.getInstance();
+        users = database.getReference("usuarios");
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Cambiar Email");
@@ -68,9 +71,9 @@ public class ChangeMail extends AppCompatActivity
                 ObjetoUsuario chmail = dataSnapshot.child(dni).getValue(ObjetoUsuario.class);
                 chmail.setEmail(mail);
                 users.child(dni).setValue(chmail);
+                Bundle bundle = ChangeMail.this.getIntent().getExtras();
                 Intent intent =
                         new Intent(ChangeMail.this,NavDrawer.class);
-                Bundle bundle = new Bundle();
                 bundle.putString("user", chmail.getNombre().toString());
                 bundle.putString("mail", chmail.getEmail().toString());
                 bundle.putString("dni", chmail.getDni().toString());
