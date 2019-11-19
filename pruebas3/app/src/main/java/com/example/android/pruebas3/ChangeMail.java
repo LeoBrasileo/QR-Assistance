@@ -74,6 +74,7 @@ public class ChangeMail extends AppCompatActivity
                 bundle.putString("user", chmail.getNombre().toString());
                 bundle.putString("mail", chmail.getEmail().toString());
                 bundle.putString("dni", chmail.getDni().toString());
+                bundle.putString("div", chmail.getSchool().toString());
                 intent.putExtras(bundle);
                 progressDialog.dismiss();
                 startActivity(intent);
