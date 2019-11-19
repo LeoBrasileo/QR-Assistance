@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Layout;
@@ -80,7 +81,7 @@ public class User_config extends Fragment
 
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_user_config, container, false);
+        final View v = inflater.inflate(R.layout.fragment_user_config, container, false);
         listView = (ListView) v.findViewById(R.id.mainMenu);
 
         database = FirebaseDatabase.getInstance();
@@ -118,7 +119,7 @@ public class User_config extends Fragment
                                 startActivity(intent);
                             }else
                             {
-                                Toast.makeText(getContext(),"Ya se encuentra registrado un mail en esta cuenta",Toast.LENGTH_LONG).show();
+                                Snackbar.make(v,"Ya se encuentra registrado un mail en esta cuenta", Snackbar.LENGTH_LONG).show();
                             }
                         }
 
